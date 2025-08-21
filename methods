@@ -1,0 +1,19 @@
+namespace Methods
+{
+    public class Rooms
+    {
+
+        public static string room1()
+        {
+            Console.WriteLine("Beside the door is a sign that says: Level 1 - The forest of walking mushrooms");
+            Console.WriteLine("You open the door and see a dungeon room almost masks itself as a forest");
+            Console.WriteLine("And suprisingly its filled with waking mushrooms");
+            Console.WriteLine("Unfortunately you can't run back to the previous level due to this being the first");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Walking Mushroom | Health: 5 | Damage: 2 | Drops: 1 coin");
+            return "Room displayed";
+        }
+    }
+}
