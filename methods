@@ -1,3 +1,4 @@
+
 namespace Methods
 {
     public class Rooms
@@ -15,6 +16,88 @@ namespace Methods
             Console.WriteLine("Name: Walking Mushroom | Health: 5 | Damage: 2 | Drops: 1 coin");
             return "Room displayed";
         }
+
+        public static string room2()
+        {
+            Console.WriteLine("Congrats you've survived though Level 1!");
+            Console.WriteLine("A door Suddenly appears with markings: Level 2 - The Slime Grottos");
+            Console.WriteLine("Through the door was an artificial looking cave dungeon with unknown plants mixed with moss which grew through the cracks");
+            Console.WriteLine("And boom filled with Slib blobs, not the good type either");
+            Console.WriteLine("Do you wish to run or fight?");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Slime Blob | Health: 10 | Damage: 8 | Drops: 2 coin");
+            return "Room displayed";
+        }
+        public static string room3()
+        {
+            Console.WriteLine("Congrats on surviving though Level 2! But will you be able to survive through this?");
+            Console.WriteLine("A door not so suprisingly appears with markings: Level 3 - Nest of the Skyward Guardians");
+            Console.WriteLine("You open the door and see a fancy dungeon room with pillars and suprisingly a few twigs fall down");
+            Console.WriteLine("You look up and you find nests, some with a few eggs and some with GRIFFINS?!? They look at you glaringly and with bloodlust");
+            Console.WriteLine("Do you wish to run or fight?");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Corrupted Griffin | Health: 25 | Damage: 20 | Drops: 10 coin");
+            return "Room displayed";
+        }
+        public static string room4()
+        {
+            Console.WriteLine("Wow you actually survived though Level 3? ...Well, try this!");
+            Console.WriteLine("This time a fancy roman door appears(Very shinny): Level 4 - The Colossus Pool");
+            Console.WriteLine("You open the door and see a huge pillared roman pool with entrance being the only thing as a border");
+            Console.WriteLine("As you walking the door slams LOUDLY");
+            Console.WriteLine("You see a deep blue shadowy figure in the water, you squint in hopes of seeing more and the huge figure splahses out the water violently");
+            Console.WriteLine("Congrats you have enqounteres a huge sea serpent with a glare of death(think you woke it up with the door)");
+            Console.WriteLine("Do you wish to run or fight?");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Sea Serpent | Health: 40 | Damage: 35 | Drops: 15 coin");
+            return "Room displayed";
+        }
+        public static string room5()
+        {
+            Console.WriteLine("Oh Wow... I did not see that coming, heh since you passed Level 4 let me introduce you to Level 5!");
+            Console.WriteLine("From a fancy door to a basic wooden door(don't judge a book by it cover...we had to rush this) on the now basic door is a sign that says: Level 5 - The Basilisk’s Rockhold");
+            Console.WriteLine("You open the door and see a huge dungeon room almost masking itself as a forest with huge rocks bigger than you(yes i'm calling you short hehehe >D )");
+            Console.WriteLine("In the center is a huge nest with dundunduunnn a Basilisk(bet you didn't guess that)");
+            Console.WriteLine("Do you wish to run or fight?");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Basilisk | Health: 65 | Damage: 50 | Drops: 24 coin");
+            return "Room displayed";
+        }
+        public static string room6()
+        {
+            Console.WriteLine("Dawm Level 6... hmm ok ... HOW ABOUT THIS!?!");
+            Console.WriteLine("A door made out a unfinished paper mache(That...was um... supposed to be done...)");
+            Console.WriteLine("Beside the door is a paper sign that says: Level 6 - Rock ‘n’ Roar Hideout");
+            Console.WriteLine("You open the door as residue of undried glue and paper sticks on your palm");
+            Console.WriteLine("You see huge dungeon room almost masking itself as a cave with huge rocks bigger than you(yes I just copied and pasted whatcha gon do about it?)");
+            Console.WriteLine("As you walk deeper you feel the atmosphere getting hotter and next thing you know right in front of you is a legandary Wyvern(hireing him was the second most expensive thing)");
+            Console.WriteLine("Do you wish to run or fight?");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Wyvern | Health: 80 | Damage: 90 | Drops: 35 coin");
+            return "Room displayed";
+        }
+        public static string room7()
+        {
+            Console.WriteLine("Beside the door is a sign that says: Level 7 - The forest of walking mushrooms");
+            Console.WriteLine("You open the door and see a dungeon room almost masks itself as a forest");
+            Console.WriteLine("And suprisingly its filled with waking mushrooms");
+            Console.WriteLine("Unfortunately you can't run back to the previous level due to this being the first");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Name: Ditto | Health: 1000 | Damage: 500 | Drops: 0 coin");
+            return "Room displayed";
+        }
     }
 
     public class Shop
@@ -22,9 +105,30 @@ namespace Methods
         public static void DisplayShop()
         {
             Console.WriteLine("Welcome to the shop!");
-            Console.WriteLine("1. Buy Health Potion - 5 coins");
-            Console.WriteLine("2. Buy Wooden Shield - 10 coins");
-            Console.WriteLine("3. Exit Shop");
+            Console.WriteLine("Here are the items available for purchase:");
+
+            Console.WriteLine("\r\nHealth:\r\n");
+
+            Console.WriteLine("1. Buy Health Potion - 15 coins - Health + 10");
+            Console.WriteLine("2. Weed - 5 coins - Health +5");
+
+            Console.WriteLine("\r\nWeapons:");
+            Console.WriteLine("Swords\r\n");
+
+            Console.WriteLine("3. Long slender blade (espada bastarda) - 16 coins - Damage 15");
+            Console.WriteLine("4.french thin pencil sword build (light one handed small sword) - 22 coins - damage 20");
+            Console.WriteLine("5. Arab curved thin sword (Arabian scimitar sword) - 30 coins - Damage 35");
+
+            Console.WriteLine("\r\nKnife/ Daggers:\r\n");
+
+            Console.WriteLine("6. Curved knife (kukri) - 10 coins - Damage 10");
+
+            Console.WriteLine("\r\nBow and Arrow:\r\n");
+
+            Console.WriteLine("7. Long horseback bow (the Yumi bow) - 13 coins - Damage 15");
+            Console.WriteLine("8. Strong blow but heavy (manchu bow) - 35 coins - Damage 35");
+
+            Console.WriteLine("\r\n9. Exit Shop\r\n");
             // Add logic for purchasing items and updating inventory
         }
     }
@@ -36,7 +140,14 @@ namespace Methods
             // Display items in the inventory
             Console.WriteLine("1. Wooden Sword");
             Console.WriteLine("2. Health Potion");
-            Console.WriteLine("3. Wooden Shield");
+            Console.WriteLine("3. Weed");
+            Console.WriteLine("4. Curved Knife");
+            Console.WriteLine("5. Long Slender Blade");
+            Console.WriteLine("6. French Thin Pencil Sword");
+            Console.WriteLine("7. Arab Curved Thin Sword");
+            Console.WriteLine("8. Long Horseback Bow");
+            Console.WriteLine("9. Strong Blow Bow");
+            Console.WriteLine("10. Exit Inventory");
             // Add logic for using items or checking inventory
         }
     }
@@ -48,6 +159,23 @@ namespace Methods
             Console.WriteLine("Choose your action:");
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Run");
+            string action = Console.ReadLine();
+            if (action == "1")
+            {
+                Console.WriteLine("You attack the Walking Mushroom with your Wooden Sword!");
+                // Add logic for attack damage and enemy response
+            }
+            else if (action == "2")
+            {
+                Console.WriteLine("You attempt to run away from the Walking Mushroom!");
+                // Add logic for running away and consequences
+            }
+            else
+            {
+                Console.WriteLine("Invalid action. The Walking Mushroom attacks you!");
+                // Add logic for enemy attack
+            }
+
             // Add logic for battle mechanics, player actions, and enemy responses
         }
     }
@@ -61,6 +189,7 @@ namespace Methods
             Console.WriteLine($"Health: {Health}");
             Console.WriteLine($"Coins: {Coins}");
             Console.WriteLine($"Weapon: {Weapon}");
+
         }
     }
 
@@ -104,7 +233,22 @@ namespace Methods
 
             Console.WriteLine("Arceus\r\nDiancie\r\n");
 
-            Console.WriteLine("Game developed by [Your Name]");
+            Console.WriteLine("Credits:\r\n");
+
+            Console.Clear();
+
+            Console.WriteLine("Game Idea: ME");
+            Console.WriteLine("Game Design: ME");
+            Console.WriteLine("Programming: ME");
+            Console.WriteLine("\r\nGraphics: Visual Studio\r\n");
+
+            Console.WriteLine("Special Thanks: Louise Christine Popp-Madsen, Zamzam Abdigani Ali, Sudden Motivation, Github, Copilot, My Sanity, My Brain Cells, Youtube, Spotify");
+            Console.WriteLine("\r\nPlaytesting: ME\r\n");
+            Console.WriteLine("Thanks for playing ig");
+            Console.WriteLine("This game was created as a fun project and as an assignment");
+            Console.WriteLine("Hope it was aight.");
+            Console.WriteLine("If you have any feedback or suggestions, please DO NOT feel free to reach out.\r\n");
+
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadKey();
         }
