@@ -1,4 +1,5 @@
 
+
 namespace Methods
 {
     public class Rooms
@@ -6,7 +7,7 @@ namespace Methods
 
         public static string room1()
         {
-            Console.WriteLine("Beside the door is a sign that says: Level 1 - The forest of walking mushrooms");
+            Console.WriteLine("Beside the door is a sign that says: Level 1 - Fungus Among Us");
             Console.WriteLine("You open the door and see a dungeon room almost masks itself as a forest");
             Console.WriteLine("And suprisingly its filled with waking mushrooms");
             Console.WriteLine("Unfortunately you can't run back to the previous level due to this being the first");
@@ -20,9 +21,9 @@ namespace Methods
         public static string room2()
         {
             Console.WriteLine("Congrats you've survived though Level 1!");
-            Console.WriteLine("A door Suddenly appears with markings: Level 2 - The Slime Grottos");
+            Console.WriteLine("A door Suddenly appears with markings: Level 2 - Slime Schlime Time");
             Console.WriteLine("Through the door was an artificial looking cave dungeon with unknown plants mixed with moss which grew through the cracks");
-            Console.WriteLine("And boom filled with Slib blobs, not the good type either");
+            Console.WriteLine("And boom filled with Slime blobs, not the good type either");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
             Console.Clear();
@@ -33,7 +34,7 @@ namespace Methods
         public static string room3()
         {
             Console.WriteLine("Congrats on surviving though Level 2! But will you be able to survive through this?");
-            Console.WriteLine("A door not so suprisingly appears with markings: Level 3 - Nest of the Skyward Guardians");
+            Console.WriteLine("A door not so suprisingly appears with markings: Level 3 - Nestflix & Chill");
             Console.WriteLine("You open the door and see a fancy dungeon room with pillars and suprisingly a few twigs fall down");
             Console.WriteLine("You look up and you find nests, some with a few eggs and some with GRIFFINS?!? They look at you glaringly and with bloodlust");
             Console.WriteLine("Do you wish to run or fight?");
@@ -46,11 +47,11 @@ namespace Methods
         public static string room4()
         {
             Console.WriteLine("Wow you actually survived though Level 3? ...Well, try this!");
-            Console.WriteLine("This time a fancy roman door appears(Very shinny): Level 4 - The Colossus Pool");
-            Console.WriteLine("You open the door and see a huge pillared roman pool with entrance being the only thing as a border");
-            Console.WriteLine("As you walking the door slams LOUDLY");
-            Console.WriteLine("You see a deep blue shadowy figure in the water, you squint in hopes of seeing more and the huge figure splahses out the water violently");
-            Console.WriteLine("Congrats you have enqounteres a huge sea serpent with a glare of death(think you woke it up with the door)");
+            Console.WriteLine("This time a fancy roman door appears(Very shinny): Level 4 - Pool of “Oops, You’re Drowning”");
+            Console.WriteLine("You open the door and see a huge pillared roman pool with entrance being the only thing as a boarder");
+            Console.WriteLine("As you walk through the door, it slams LOUDLY");
+            Console.WriteLine("You see a deep blue shadowy figure in the water, you squint in hopes of seeing more and the huge figure splashes out the water violently");
+            Console.WriteLine("Congrats you have encounter a huge sea serpent with a glare of death(think you woke it up with the door)");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
             Console.Clear();
@@ -61,7 +62,7 @@ namespace Methods
         public static string room5()
         {
             Console.WriteLine("Oh Wow... I did not see that coming, heh since you passed Level 4 let me introduce you to Level 5!");
-            Console.WriteLine("From a fancy door to a basic wooden door(don't judge a book by it cover...we had to rush this) on the now basic door is a sign that says: Level 5 - The Basilisk’s Rockhold");
+            Console.WriteLine("From a fancy door to a basic wooden door(don't judge a book by it cover...we had to rush this) on the now basic door is a sign that says: Level 5 - The Dino-Den of Doom");
             Console.WriteLine("You open the door and see a huge dungeon room almost masking itself as a forest with huge rocks bigger than you(yes i'm calling you short hehehe >D )");
             Console.WriteLine("In the center is a huge nest with dundunduunnn a Basilisk(bet you didn't guess that)");
             Console.WriteLine("Do you wish to run or fight?");
@@ -73,7 +74,7 @@ namespace Methods
         }
         public static string room6()
         {
-            Console.WriteLine("Dawm Level 6... hmm ok ... HOW ABOUT THIS!?!");
+            Console.WriteLine("Dawm Level 5... hmm ok ... HOW ABOUT THIS!?!");
             Console.WriteLine("A door made out a unfinished paper mache(That...was um... supposed to be done...)");
             Console.WriteLine("Beside the door is a paper sign that says: Level 6 - Rock ‘n’ Roar Hideout");
             Console.WriteLine("You open the door as residue of undried glue and paper sticks on your palm");
@@ -88,10 +89,13 @@ namespace Methods
         }
         public static string room7()
         {
-            Console.WriteLine("Beside the door is a sign that says: Level 7 - The forest of walking mushrooms");
-            Console.WriteLine("You open the door and see a dungeon room almost masks itself as a forest");
-            Console.WriteLine("And suprisingly its filled with waking mushrooms");
-            Console.WriteLine("Unfortunately you can't run back to the previous level due to this being the first");
+            Console.WriteLine("I honestly have no words... But you definitely are NOT getting past this. (And yes, I’m totally petty about it.)");
+            Console.WriteLine("Suddenly, a golden door materializes — the third most expensive thing in the dungeon.");
+            Console.WriteLine("You open it to find a room overflowing with the most luxurious treasures you’ve ever heard of... or seen.");
+            Console.WriteLine("At the center, a grand staircase of pure gold, draped in rich red carpet, leads up to a throne.");
+            Console.WriteLine("And sitting on that throne is... what is THAT?! A... DITTO?!?! (Took almost all our budget)");
+            Console.WriteLine("DUN DUN DUUUUNNNN! *dramatic sound effect*");
+            Console.WriteLine("Do you dare to fight or run away screaming?");
             Console.ReadLine();
             Console.Clear();
 
@@ -253,5 +257,7 @@ namespace Methods
             Console.ReadKey();
         }
     }
+
+
 
 }
