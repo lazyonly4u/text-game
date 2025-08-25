@@ -1,9 +1,21 @@
-
-
 namespace Methods
 {
     public class Rooms
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<string> Enemies { get; set; } = new List<string>();
+
+        public Rooms(string Name, string Description)
+        {
+            this.Name = Name;
+            this.Description = Description;
+        }
+
+        public void AddEnemy(string enemy)
+        {
+            Enemies.Add(enemy);
+        }
 
         public static string room1()
         {
@@ -12,9 +24,10 @@ namespace Methods
             Console.WriteLine("And suprisingly its filled with waking mushrooms");
             Console.WriteLine("Unfortunately you can't run back to the previous level due to this being the first");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Walking Mushroom | Health: 5 | Damage: 2 | Drops: 1 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
 
@@ -26,9 +39,10 @@ namespace Methods
             Console.WriteLine("And boom filled with Slime blobs, not the good type either");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Slime Blob | Health: 10 | Damage: 8 | Drops: 2 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
         public static string room3()
@@ -39,24 +53,26 @@ namespace Methods
             Console.WriteLine("You look up and you find nests, some with a few eggs and some with GRIFFINS?!? They look at you glaringly and with bloodlust");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Corrupted Griffin | Health: 25 | Damage: 20 | Drops: 10 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
         public static string room4()
         {
             Console.WriteLine("Wow you actually survived though Level 3? ...Well, try this!");
-            Console.WriteLine("This time a fancy roman door appears(Very shinny): Level 4 - Pool of “Oops, You’re Drowning”");
+            Console.WriteLine("This time a fancy roman door appears(Very shinny): Level 4 - Pool of “Oops, You’re Drowning");
             Console.WriteLine("You open the door and see a huge pillared roman pool with entrance being the only thing as a boarder");
             Console.WriteLine("As you walk through the door, it slams LOUDLY");
             Console.WriteLine("You see a deep blue shadowy figure in the water, you squint in hopes of seeing more and the huge figure splashes out the water violently");
             Console.WriteLine("Congrats you have encounter a huge sea serpent with a glare of death(think you woke it up with the door)");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Sea Serpent | Health: 40 | Damage: 35 | Drops: 15 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
         public static string room5()
@@ -67,9 +83,10 @@ namespace Methods
             Console.WriteLine("In the center is a huge nest with dundunduunnn a Basilisk(bet you didn't guess that)");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Basilisk | Health: 65 | Damage: 50 | Drops: 24 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
         public static string room6()
@@ -82,24 +99,26 @@ namespace Methods
             Console.WriteLine("As you walk deeper you feel the atmosphere getting hotter and next thing you know right in front of you is a legandary Wyvern(hireing him was the second most expensive thing)");
             Console.WriteLine("Do you wish to run or fight?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Wyvern | Health: 80 | Damage: 90 | Drops: 35 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
         public static string room7()
         {
             Console.WriteLine("I honestly have no words... But you definitely are NOT getting past this. (And yes, I’m totally petty about it.)");
-            Console.WriteLine("Suddenly, a golden door materializes — the third most expensive thing in the dungeon.");
+            Console.WriteLine("Suddenly, a golden door materializes (the third most expensive thing in the dungeon) With letters encapsulated in diamond saying: Level 7 - The unknown.");
             Console.WriteLine("You open it to find a room overflowing with the most luxurious treasures you’ve ever heard of... or seen.");
             Console.WriteLine("At the center, a grand staircase of pure gold, draped in rich red carpet, leads up to a throne.");
             Console.WriteLine("And sitting on that throne is... what is THAT?! A... DITTO?!?! (Took almost all our budget)");
             Console.WriteLine("DUN DUN DUUUUNNNN! *dramatic sound effect*");
             Console.WriteLine("Do you dare to fight or run away screaming?");
             Console.ReadLine();
-            Console.Clear();
 
             Console.WriteLine("Name: Ditto | Health: 1000 | Damage: 500 | Drops: 0 coin");
+            Console.ReadLine();
+            Console.Clear();
             return "Room displayed";
         }
     }
@@ -136,6 +155,19 @@ namespace Methods
             // Add logic for purchasing items and updating inventory
         }
     }
+
+    public class secretitems
+    {
+        public static void DisplaySecretItems()
+        {
+            Console.WriteLine("Secret Items:\r\n");
+            Console.WriteLine("1. Magical girl wand damage: 1000");
+            Console.WriteLine("2. Avatar powers damage: 880");
+            Console.WriteLine("3. Lostvayne (seven deadly sins) damage: 500");
+
+        }
+    }
+
     public class Inventory
     {
         public static void DisplayInventory()
@@ -203,12 +235,48 @@ namespace Methods
         {
             Console.WriteLine("Welcome to the game!");
             Player.DisplayStats();
-            Rooms.room1();
-            Battle.StartBattle();
+
+            // Array of room methods
+            Func<string>[] rooms = {
+            Rooms.room1,
+            Rooms.room2,
+            Rooms.room3,
+            Rooms.room4,
+            Rooms.room5,
+            Rooms.room6,
+            Rooms.room7
+        };
+
+            foreach (var room in rooms)
+            {
+                room();
+                Battle.StartBattle();
+            }
+
             Shop.DisplayShop();
             Inventory.DisplayInventory();
         }
     }
+
+    public class CallRoom(int room)
+    {
+        public void CallTheRoom(int room)
+        {
+            switch (room)
+            {
+                case 1: Rooms.room1(); break;
+                case 2: Rooms.room2(); break;
+                case 3: Rooms.room3(); break;
+                case 4: Rooms.room4(); break;
+                case 5: Rooms.room5(); break;
+                case 6: Rooms.room6(); break;
+                case 7: Rooms.room7(); break;
+            }
+        }
+
+    }
+
+
     public class CREDITS
         {
         public static void DisplayCredits()
@@ -258,6 +326,65 @@ namespace Methods
         }
     }
 
+    public class Exit
+    {
+        public static void ExitGame()
+        {
+            Console.WriteLine("Are you sure you want to exit? (yes/no)");
+            string choice = Console.ReadLine();
+            if (choice.ToLower() == "yes")
+            {
+                Console.WriteLine("Thanks for playing! Goodbye!");
+                Environment.Exit(0);
+            }
+            else
+            {
+                Console.WriteLine("Returning to the game...");
+            }
+        }
+    }
+
+    public class Error
+    {
+        public static void DisplayError()
+        {
+            Console.WriteLine("An error has occurred. Please try again.");
+        }
+    }
+
+    public class Help
+    {
+        public static void DisplayHelp()
+        {
+            Console.WriteLine("Help Menu:");
+            Console.WriteLine("1. To navigate through the game, follow the prompts and enter your choices.");
+            Console.WriteLine("2. To view your inventory, select the inventory option from the main menu.");
+            Console.WriteLine("3. To visit the shop, select the shop option from the main menu.");
+            Console.WriteLine("4. To check your stats, select the stats option from the main menu.");
+            Console.WriteLine("5. To exit the game, select the exit option from the main menu.");
+            Console.WriteLine("6. For any other assistance, please refer to the game documentation or contact support.");
+        }
+    }
+
+    public class items
+    {
+        public static void DisplayItems()
+        {
+            Console.WriteLine("Available Items:");
+            Console.WriteLine("1. Health Potion - Restores 10 health points.");
+            Console.WriteLine("2. Weed - Restores 5 health points.");
+            Console.WriteLine("3. Wooden Sword - Basic weapon with low damage.");
+            Console.WriteLine("4. Curved Knife - Increases damage by 10 points.");
+            Console.WriteLine("5. Long Slender Blade - Increases damage by 15 points.");
+            Console.WriteLine("6. French Thin Pencil Sword - Increases damage by 20 points.");
+            Console.WriteLine("7. Arab Curved Thin Sword - Increases damage by 35 points.");
+            Console.WriteLine("8. Long Horseback Bow - Increases damage by 15 points.");
+            Console.WriteLine("9. Strong Blow Bow - Increases damage by 35 points.");
+        }
+    }
+
 
 
 }
+
+
