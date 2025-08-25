@@ -1,81 +1,11 @@
 
 
+
 using System.ComponentModel;
 
 namespace Methods
 {    
 
-        public static string room1()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Walking Mushroom | Health: 5 | Damage: 2 | Drops: 1 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-
-        public static string room2()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Slime Blob | Health: 10 | Damage: 8 | Drops: 2 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-        public static string room3()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Corrupted Griffin | Health: 25 | Damage: 20 | Drops: 10 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-        public static string room4()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Sea Serpent | Health: 40 | Damage: 35 | Drops: 15 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-        public static string room5()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Basilisk | Health: 65 | Damage: 50 | Drops: 24 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-        public static string room6()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Wyvern | Health: 80 | Damage: 90 | Drops: 35 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
-        public static string room7()
-        {
-
-            Console.ReadLine();
-
-            Console.WriteLine("Name: Ditto | Health: 1000 | Damage: 500 | Drops: 0 coin");
-            Console.ReadLine();
-            Console.Clear();
-            return "Room displayed";
-        }
 
     public class Rooms
     {
@@ -211,53 +141,6 @@ namespace Methods
             Console.WriteLine($"Weapon: {Weapon}");
 
         }
-    }
-
-    public class Game
-    {
-        public static void StartGame()
-        {
-            Console.WriteLine("Welcome to the game!");
-            Player.DisplayStats();
-
-            // Array of room methods
-            Func<string>[] rooms = {
-            Rooms.room1,
-            Rooms.room2,
-            Rooms.room3,
-            Rooms.room4,
-            Rooms.room5,
-            Rooms.room6,
-            Rooms.room7
-        };
-
-            foreach (var room in rooms)
-            {
-                room();
-                Battle.StartBattle();
-            }
-
-            Shop.DisplayShop();
-            Inventory.DisplayInventory();
-        }
-    }
-
-    public class CallRoom(int room)
-    {
-        public void CallTheRoom(int room)
-        {
-            switch (room)
-            {
-                case 1: Rooms.room1(); break;
-                case 2: Rooms.room2(); break;
-                case 3: Rooms.room3(); break;
-                case 4: Rooms.room4(); break;
-                case 5: Rooms.room5(); break;
-                case 6: Rooms.room6(); break;
-                case 7: Rooms.room7(); break;
-            }
-        }
-
     }
 
 
