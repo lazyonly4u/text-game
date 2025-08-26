@@ -1,22 +1,20 @@
 
 
-
 using System.ComponentModel;
 
 namespace Methods
 {    
 
 
-    public class Rooms
+    public class Room
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<string> Enemies { get; set; } = new List<string>();
 
-        public Rooms(string Name, string Description)
+        public Room(string Name, string Description)
         {
-            this.Name = Name;
-            this.Description = Description;
+            Name = Name;
+            Description = Description;
         }
     }
 
@@ -26,16 +24,17 @@ namespace Methods
         public string Name { get; set; }
         public int Health { get; set; }
         public int Damage { get; set; }
-        public int Drops { get; set; }
+        public int Coins { get; set; }
 
         public Monster(string Name, int Health, int Damage, int Drops)
         {
-            this.Name = Name;
-            this.Health = Health;
-            this.Damage = Damage;
-            this.Drops = Drops;
+            Name = Name;
+            Health = Health;
+            Damage = Damage;
+            Coins = Coins;
         }
     }
+
 
     public class Shop
     {
@@ -70,6 +69,21 @@ namespace Methods
         }
     }
 
+    public class weapons
+    {
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Damage { get; set; }
+
+        public weapons(string Name, int Cost, int Damage)
+        {
+            Name = Name;
+            Cost = Cost;
+            Damage = Damage;
+
+        }
+    }
+
     public class secretitems
     {
         public static void DisplaySecretItems()
@@ -101,45 +115,87 @@ namespace Methods
             // Add logic for using items or checking inventory
         }
     }
+
+
     public class Battle
     {
-        public static void StartBattle()
+        public static void StartBattle(Monster monster)
         {
-            Console.WriteLine("A wild Walking Mushroom appears!");
-            Console.WriteLine("Choose your action:");
-            Console.WriteLine("1. Attack");
-            Console.WriteLine("2. Run");
-            string action = Console.ReadLine();
-            if (action == "1")
+            Console.WriteLine($"A wild {monster.Name} appears!");
+            int monsterHealth = monster.Health;
+            int playerAttack = GetPlayerAttack();
+
+            while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine("You attack the Walking Mushroom with your Wooden Sword!");
-                // Add logic for attack damage and enemy response
-            }
-            else if (action == "2")
-            {
-                Console.WriteLine("You attempt to run away from the Walking Mushroom!");
-                // Add logic for running away and consequences
-            }
-            else
-            {
-                Console.WriteLine("Invalid action. The Walking Mushroom attacks you!");
-                // Add logic for enemy attack
+                Console.WriteLine($"\nYour Health: {Player.Health} | {monster.Name} Health: {monsterHealth}");
+                Console.WriteLine("Choose your action: (attack/run)");
+                string action = Console.ReadLine().ToLower();
+
+                if (action == "attack")
+                {
+                    // Player attacks monster
+                    monsterHealth -= playerAttack;
+                    Console.WriteLine($"You attack with your {Player.Weapon} and deal {playerAttack} damage!");
+
+                    if (monsterHealth <= 0)
+                    {
+                        Console.WriteLine($"You defeated the {monster.Name}!");
+                        break;
+                    }
+
+                    // Monster attacks player
+                    Player.Health -= monster.Damage;
+                    Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
+                }
+                else if (action == "run")
+                {
+                    Console.WriteLine("You attempt to run away...");
+                    // Add consequences for running here if you want
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid action. The monster attacks you!");
+                    Player.Health -= monster.Damage;
+                }
             }
 
-            // Add logic for battle mechanics, player actions, and enemy responses
+            if (Player.Health <= 0)
+            {
+                Console.WriteLine("You have been defeated!");
+            }
+        }
+
+        private static int GetPlayerAttack()
+        {
+            // Simple weapon-based attack values
+            return Player.Weapon switch
+            {
+                "Wooden Sword" => 5,
+                "Long Slender Blade" => 15,
+                "Curved Knife" => 10,
+                "French Thin Pencil Sword" => 20,
+                "Arab Curved Thin Sword" => 35,
+                "Long Horseback Bow" => 15,
+                "Strong Blow Bow" => 35,
+                _ => 2 // default for fists or unknown weapon
+            };
         }
     }
+
+
     public class Player
     {
-        public static int Health = 10;
-        public static int Coins = 0;
-        public static string Weapon = "Wooden Sword";
+        public static int Health { get; set; } = 50;
+        public static int Coins { get; set; } = 10;
+        public static string Weapon { get; set; } = "Wooden Sword";
+
+        public static Room CurrentRoom { get; set; }
         public static void DisplayStats()
         {
             Console.WriteLine($"Health: {Health}");
             Console.WriteLine($"Coins: {Coins}");
             Console.WriteLine($"Weapon: {Weapon}");
-
         }
     }
 
@@ -211,27 +267,6 @@ namespace Methods
         }
     }
 
-    public class Error
-    {
-        public static void DisplayError()
-        {
-            Console.WriteLine("An error has occurred. Please try again.");
-        }
-    }
-
-    public class Help
-    {
-        public static void DisplayHelp()
-        {
-            Console.WriteLine("Help Menu:");
-            Console.WriteLine("1. To navigate through the game, follow the prompts and enter your choices.");
-            Console.WriteLine("2. To view your inventory, select the inventory option from the main menu.");
-            Console.WriteLine("3. To visit the shop, select the shop option from the main menu.");
-            Console.WriteLine("4. To check your stats, select the stats option from the main menu.");
-            Console.WriteLine("5. To exit the game, select the exit option from the main menu.");
-            Console.WriteLine("6. For any other assistance, please refer to the game documentation or contact support.");
-        }
-    }
 
     public class items
     {
@@ -253,3 +288,5 @@ namespace Methods
 
 
 }
+
+
