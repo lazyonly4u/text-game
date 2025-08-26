@@ -13,8 +13,15 @@ namespace Methods
 
         public Room(string Name, string Description)
         {
-            Name = Name;
-            Description = Description;
+            this.Name = Name;
+            this.Description = Description;
+        }
+        public void Enter()
+        {
+            Console.Clear();
+            Console.WriteLine($"You enter: {Name}");
+            Console.WriteLine(Description);
+
         }
     }
 
@@ -28,44 +35,59 @@ namespace Methods
 
         public Monster(string Name, int Health, int Damage, int Drops)
         {
-            Name = Name;
-            Health = Health;
-            Damage = Damage;
-            Coins = Coins;
+            this.Name = Name;
+            this.Health = Health;
+            this.Damage = Damage;
+            this.Coins = Coins;
         }
     }
 
 
     public class Shop
     {
-        public static void DisplayShop()
+        public static void DisplayShop(List<weapons> shopWeapons)
         {
             Console.WriteLine("Welcome to the shop!");
-            Console.WriteLine("Here are the items available for purchase:");
+            Console.WriteLine("Here are the items available for purchase:\n");
 
-            Console.WriteLine("\r\nHealth:\r\n");
+            for (int i = 0; i < shopWeapons.Count; i++)
+            {
+                var w = shopWeapons[i];
+                Console.WriteLine($"{i + 1}. {w.Name} - {w.Cost} coins - Damage {w.Damage}");
+            }
+            Console.WriteLine($"{shopWeapons.Count + 1}. Exit Shop");
 
-            Console.WriteLine("1. Buy Health Potion - 15 coins - Health + 10");
-            Console.WriteLine("2. Weed - 5 coins - Health +5");
-
-            Console.WriteLine("\r\nWeapons:");
-            Console.WriteLine("Swords\r\n");
-
-            Console.WriteLine("3. Long slender blade (espada bastarda) - 16 coins - Damage 15");
-            Console.WriteLine("4.french thin pencil sword build (light one handed small sword) - 22 coins - damage 20");
-            Console.WriteLine("5. Arab curved thin sword (Arabian scimitar sword) - 30 coins - Damage 35");
-
-            Console.WriteLine("\r\nKnife/ Daggers:\r\n");
-
-            Console.WriteLine("6. Curved knife (kukri) - 10 coins - Damage 10");
-
-            Console.WriteLine("\r\nBow and Arrow:\r\n");
-
-            Console.WriteLine("7. Long horseback bow (the Yumi bow) - 13 coins - Damage 15");
-            Console.WriteLine("8. Strong blow but heavy (manchu bow) - 35 coins - Damage 35");
-
-            Console.WriteLine("\r\n9. Exit Shop\r\n");
-            // Add logic for purchasing items and updating inventory
+            Console.WriteLine("\nEnter the number of the weapon you want to buy, or exit:");
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out int choice))
+            {
+                if (choice >= 1 && choice <= shopWeapons.Count)
+                {
+                    var selected = shopWeapons[choice - 1];
+                    if (Player.Coins >= selected.Cost)
+                    {
+                        Player.Coins -= selected.Cost;
+                        Player.Weapon = selected.Name;
+                        Console.WriteLine($"You bought and equipped the {selected.Name}!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have enough coins!");
+                    }
+                }
+                else if (choice == shopWeapons.Count + 1)
+                {
+                    Console.WriteLine("Exiting shop.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
         }
     }
 
@@ -77,9 +99,9 @@ namespace Methods
 
         public weapons(string Name, int Cost, int Damage)
         {
-            Name = Name;
-            Cost = Cost;
-            Damage = Damage;
+            this.Name = Name;
+            this.Cost = Cost;
+            this.Damage = Damage;
 
         }
     }
@@ -117,9 +139,9 @@ namespace Methods
     }
 
 
-    public class Battle
+    public class Combat
     {
-        public static void StartBattle(Monster monster)
+        public static void Fight(Monster monster)
         {
             Console.WriteLine($"A wild {monster.Name} appears!");
             int monsterHealth = monster.Health;
@@ -133,7 +155,6 @@ namespace Methods
 
                 if (action == "attack")
                 {
-                    // Player attacks monster
                     monsterHealth -= playerAttack;
                     Console.WriteLine($"You attack with your {Player.Weapon} and deal {playerAttack} damage!");
 
@@ -143,14 +164,13 @@ namespace Methods
                         break;
                     }
 
-                    // Monster attacks player
                     Player.Health -= monster.Damage;
                     Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
                 }
                 else if (action == "run")
                 {
                     Console.WriteLine("You attempt to run away...");
-                    // Add consequences for running here if you want
+                    // Add any run consequences here if you want
                     break;
                 }
                 else
@@ -168,14 +188,14 @@ namespace Methods
 
         private static int GetPlayerAttack()
         {
-            // Simple weapon-based attack values
+            // You can make this more dynamic if you want to use weapon objects
             return Player.Weapon switch
             {
                 "Wooden Sword" => 5,
                 "Long Slender Blade" => 15,
-                "Curved Knife" => 10,
                 "French Thin Pencil Sword" => 20,
                 "Arab Curved Thin Sword" => 35,
+                "Curved Knife" => 10,
                 "Long Horseback Bow" => 15,
                 "Strong Blow Bow" => 35,
                 _ => 2 // default for fists or unknown weapon
