@@ -1,4 +1,5 @@
 
+
 using System.ComponentModel;
 using System.Reflection.PortableExecutable;
 
@@ -117,16 +118,15 @@ namespace Methods
         public int Cost { get; set; }
         public int Damage { get; set; }
         public bool IsRanged { get; set; }
-        public int UsesLeft { get; set; } 
+        public int UsesLeft { get; set; }
 
-        public weapons(string Name, int Cost, int Damage, bool IsRanged)
+        public weapons(string Name, int Cost, int Damage, bool IsRanged, int UsesLeft)
         {
             this.Name = Name;
             this.Cost = Cost;
             this.Damage = Damage;
             this.IsRanged = IsRanged;
-            this.UsesLeft = IsRanged ? 5 : -1; // Ranged weapons have limited uses
-
+            this.UsesLeft = UsesLeft;
 
 
         }
@@ -134,36 +134,40 @@ namespace Methods
 
     public class secretitems
     {
+        private static int wrongAttempts = 0;
+
         public static void DisplaySecretItems()
         {
             Console.WriteLine("Welcome to the Secret Items Shop! Please enter the code:");
-            string code = Console.ReadLine();
+            string code = Console.ReadLine().ToLower();
 
-            if (code != "magi")
+            if (code == "magi")
             {
-                Console.WriteLine(" You have entered Magical girl wand damage: 1000, do you wish to add into your inventory?(y or n):");
+                Console.WriteLine("You have entered Magical girl wand damage: 1000, do you wish to add into your inventory? (y or n):");
 
-                return;
+                wrongAttempts = 0; // reset on success
             }
             else if (code == "av4")
             {
-                Console.WriteLine(" You have entered Avatar powers damage: 880, do you wish to add into your inventory?(y or n):");
+                Console.WriteLine("You have entered Avatar powers damage: 880, do you wish to add into your inventory? (y or n):");
 
-                return;
+                wrongAttempts = 0; // reset on success
             }
             else if (code == "l0st")
             {
-                Console.WriteLine(" You have entered Lostvayne (seven deadly sins) damage: 500, do you wish to add into your inventory?(y or n):");
-
-                return;
+                Console.WriteLine("You have entered Lostvayne (seven deadly sins) damage: 500, do you wish to add into your inventory? (y or n):");
+                // Add logic to add to inventory if 'y'
+                wrongAttempts = 0; // reset on success
             }
             else
             {
-                Console.WriteLine("Invalid code. Punishment initiating...Done!");
-                Player.Coins -= 1;
-
-                return;
-
+                wrongAttempts++;
+                int penalty = wrongAttempts == 1 ? 1 : (wrongAttempts - 1) * 5;
+                Console.WriteLine($"Invalid code. Punishment: -{penalty} coins.");
+                Player.Coins -= penalty;
+                Console.WriteLine($"You now have {Player.Coins} coins.");
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
             }
         }
     }
@@ -176,7 +180,20 @@ namespace Methods
             Console.WriteLine($"Health: {Player.Health}");
             Console.WriteLine($"Coins: {Player.Coins}");
             Console.WriteLine($"Weapon: {Player.Weapon}");
-
+            if (Player.Items.Count > 0)
+            {
+                Console.WriteLine("Items:");
+                foreach (var item in Player.Items)
+                {
+                    Console.WriteLine($"- {item}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No other items in inventory.");
+            }
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
         }
     }
 
@@ -227,7 +244,7 @@ namespace Methods
 
             if (Player.Health <= 0)
             {
-                Console.WriteLine("You have been defeated!");
+                Console.WriteLine("hahahahahah you died lol");
             }
         }
 
@@ -253,7 +270,8 @@ namespace Methods
     {
         public static int Health { get; set; } = 50;
         public static int Coins { get; set; } = 10;
-        public static string Weapon { get; set; } = "Wooden Sword";
+        public static string Weapon { get; set; }
+        public static List<string> Items { get; set; } = new List<string>();
 
         public static Room CurrentRoom { get; set; }
         public static void DisplayStats()
@@ -353,3 +371,5 @@ namespace Methods
 
 
 }
+
+
