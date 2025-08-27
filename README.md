@@ -70,16 +70,16 @@ namespace calculator
             Monster Wyvern = new Monster("Wyvern", 80, 90, 35, 1);
             Monster Ditto = new Monster("Ditto", 1000, 500, 0, 1);
 
-            weapons WoodenSword = new weapons("Wooden Sword", 0, 5);
+            weapons WoodenSword = new weapons("Wooden Sword", 0, 5, false, 10);
 
-            weapons LongSlenderBlade = new weapons("Long Slender Blade", 16, 15);
-            weapons FrenchThinPencilSword = new weapons("French Thin Pencil Sword", 22, 20);
-            weapons ArabCurvedThinSword = new weapons("Arab Curved Thin Sword", 30, 35);
+            weapons LongSlenderBlade = new weapons("Long Slender Blade", 16, 15, false, 15);
+            weapons FrenchThinPencilSword = new weapons("French Thin Pencil Sword", 22, 20, false, 20);
+            weapons ArabCurvedThinSword = new weapons("Arab Curved Thin Sword", 30, 35, false, 35);
 
-            weapons CurvedKnife = new weapons("Curved Knife", 10, 10);
+            weapons CurvedKnife = new weapons("Curved Knife", 10, 10, false, 15);
 
-            weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15);
-            weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35);
+            weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15, true, 15);
+            weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35, true, 20);
 
              
 
@@ -109,7 +109,7 @@ namespace calculator
             {
                 Room room = rooms[currentRoom];
                 room.Enter();
-                Console.WriteLine("What do you want to do? (fight/run/shop/inventory/exit)");
+                Console.WriteLine("What do you want to do? (fight/run/shop/inventory/secret/exit)");
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
@@ -178,6 +178,10 @@ namespace calculator
                     case "inventory":
 
                         Inventory.DisplayInventory();
+                        break;
+                    case "secret":
+
+                        secretitems.DisplaySecretItems();
                         break;
                     case "exit":
                         Exit.ExitGame();
