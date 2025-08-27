@@ -1,6 +1,6 @@
 
-
 using System.ComponentModel;
+using System.Reflection.PortableExecutable;
 
 namespace Methods
 {    
@@ -10,6 +10,8 @@ namespace Methods
     {
         public string Name { get; set; }
         public string Description { get; set; }
+
+        //public List<Item> Items { get; set; } = new List<Item>();
 
         public Room(string Name, string Description)
         {
@@ -23,6 +25,10 @@ namespace Methods
             Console.WriteLine(Description);
 
         }
+        //public void AddIteam(Item item)
+        //{
+        //    Items.Add(item);
+        //}
     }
 
 
@@ -32,13 +38,15 @@ namespace Methods
         public int Health { get; set; }
         public int Damage { get; set; }
         public int Coins { get; set; }
+        public int Amount { get; set; }
 
-        public Monster(string Name, int Health, int Damage, int Drops)
+        public Monster(string Name, int Health, int Damage, int Coins, int Amount)
         {
             this.Name = Name;
             this.Health = Health;
             this.Damage = Damage;
             this.Coins = Coins;
+            this.Amount = Amount;
         }
     }
 
@@ -91,17 +99,35 @@ namespace Methods
         }
     }
 
+    public class health
+    {
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Heal { get; set; }
+        public health(string Name, int Cost, int Heal)
+        {
+            this.Name = Name;
+            this.Cost = Cost;
+            this.Heal = Heal;
+        }
+    }
     public class weapons
     {
         public string Name { get; set; }
         public int Cost { get; set; }
         public int Damage { get; set; }
+        public bool IsRanged { get; set; }
+        public int UsesLeft { get; set; } 
 
-        public weapons(string Name, int Cost, int Damage)
+        public weapons(string Name, int Cost, int Damage, bool IsRanged)
         {
             this.Name = Name;
             this.Cost = Cost;
             this.Damage = Damage;
+            this.IsRanged = IsRanged;
+            this.UsesLeft = IsRanged ? 5 : -1; // Ranged weapons have limited uses
+
+
 
         }
     }
@@ -110,11 +136,35 @@ namespace Methods
     {
         public static void DisplaySecretItems()
         {
-            Console.WriteLine("Secret Items:\r\n");
-            Console.WriteLine("1. Magical girl wand damage: 1000");
-            Console.WriteLine("2. Avatar powers damage: 880");
-            Console.WriteLine("3. Lostvayne (seven deadly sins) damage: 500");
+            Console.WriteLine("Welcome to the Secret Items Shop! Please enter the code:");
+            string code = Console.ReadLine();
 
+            if (code != "magi")
+            {
+                Console.WriteLine(" You have entered Magical girl wand damage: 1000, do you wish to add into your inventory?(y or n):");
+
+                return;
+            }
+            else if (code == "av4")
+            {
+                Console.WriteLine(" You have entered Avatar powers damage: 880, do you wish to add into your inventory?(y or n):");
+
+                return;
+            }
+            else if (code == "l0st")
+            {
+                Console.WriteLine(" You have entered Lostvayne (seven deadly sins) damage: 500, do you wish to add into your inventory?(y or n):");
+
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Invalid code. Punishment initiating...Done!");
+                Player.Coins -= 1;
+
+                return;
+
+            }
         }
     }
 
@@ -123,18 +173,10 @@ namespace Methods
         public static void DisplayInventory()
         {
             Console.WriteLine("Your Inventory:");
-            // Display items in the inventory
-            Console.WriteLine("1. Wooden Sword");
-            Console.WriteLine("2. Health Potion");
-            Console.WriteLine("3. Weed");
-            Console.WriteLine("4. Curved Knife");
-            Console.WriteLine("5. Long Slender Blade");
-            Console.WriteLine("6. French Thin Pencil Sword");
-            Console.WriteLine("7. Arab Curved Thin Sword");
-            Console.WriteLine("8. Long Horseback Bow");
-            Console.WriteLine("9. Strong Blow Bow");
-            Console.WriteLine("10. Exit Inventory");
-            // Add logic for using items or checking inventory
+            Console.WriteLine($"Health: {Player.Health}");
+            Console.WriteLine($"Coins: {Player.Coins}");
+            Console.WriteLine($"Weapon: {Player.Weapon}");
+
         }
     }
 
@@ -145,11 +187,14 @@ namespace Methods
         {
             Console.WriteLine($"A wild {monster.Name} appears!");
             int monsterHealth = monster.Health;
+            int monsterDamage = monster.Damage;
+            int monsterCoins = monster.Coins;
+            int monsterAmount = monster.Amount;
             int playerAttack = GetPlayerAttack();
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} | {monster.Name} Health: {monsterHealth}");
+                Console.WriteLine($"\nYour Health: {Player.Health} | {monster.Name} Health: {monsterHealth} Damage: {monsterDamage} Coin Drops: {monsterCoins} Amount of Monsters {monsterAmount}");
                 Console.WriteLine("Choose your action: (attack/run)");
                 string action = Console.ReadLine().ToLower();
 
@@ -273,11 +318,11 @@ namespace Methods
     {
         public static void ExitGame()
         {
-            Console.WriteLine("Are you sure you want to exit? (yes/no)");
+            Console.WriteLine("Are you SURE you want to exit? (yes/no)");
             string choice = Console.ReadLine();
             if (choice.ToLower() == "yes")
             {
-                Console.WriteLine("Thanks for playing! Goodbye!");
+                Console.WriteLine("Dawm ok... Farewell Adventurere, May the abyss be to your liking");
                 Environment.Exit(0);
             }
             else
@@ -308,5 +353,3 @@ namespace Methods
 
 
 }
-
-
