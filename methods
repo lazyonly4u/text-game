@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Reflection.PortableExecutable;
 
 namespace Methods
-{    
+{
 
 
     public class Room
@@ -12,7 +12,6 @@ namespace Methods
         public string Name { get; set; }
         public string Description { get; set; }
 
-        //public List<Item> Items { get; set; } = new List<Item>();
 
         public Room(string Name, string Description)
         {
@@ -26,11 +25,9 @@ namespace Methods
             Console.WriteLine(Description);
 
         }
-        //public void AddIteam(Item item)
-        //{
-        //    Items.Add(item);
-        //}
+
     }
+
 
 
     public class Monster
@@ -51,6 +48,148 @@ namespace Methods
         }
     }
 
+    public class health
+    {
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Heal { get; set; }
+        public health(string Name, int Cost, int Heal)
+        {
+            this.Name = Name;
+            this.Cost = Cost;
+            this.Heal = Heal;
+        }
+    }
+    public class weapons
+    {
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Damage { get; set; }
+        public bool IsRanged { get; set; }
+        public int UsesLeft { get; set; }
+
+        public weapons(string Name, int Cost, int Damage, bool IsRanged, int UsesLeft)
+        {
+            this.Name = Name;
+            this.Cost = Cost;
+            this.Damage = Damage;
+            this.IsRanged = IsRanged;
+            this.UsesLeft = UsesLeft;
+
+        }
+    }
+    public class Player
+    {
+        public static int Health { get; set; } = 50;
+        public static int Coins { get; set; } = 10;
+        public static string Weapon { get; set; }
+        public static List<string> Items { get; set; } = new List<string>();
+
+        public static Room CurrentRoom { get; set; }
+        public static void DisplayStats()
+        {
+            Console.WriteLine($"Health: {Health}");
+            Console.WriteLine($"Coins: {Coins}");
+            Console.WriteLine($"Weapon: {Weapon}");
+            Console.WriteLine("Items: " + (Items.Count > 0 ? string.Join(", ", Items) : "None"));
+        }
+    }
+
+    public class intro
+    {
+        public static void DisplayIntro()
+        {
+            Console.ReadLine();
+
+            Console.WriteLine(" .oooooo..o oooo   o8o                                                 .oooooo..o     .              .o8                           .oo.           .oooooo..o     .                .o88o.  .o88o. \r\nd8P'    `Y8 `888   `\"'                                                d8P'    `Y8   .o8             \"888                         .88' `8.        d8P'    `Y8   .o8                888 `\"  888 `\" \r\nY88bo.       888  oooo  ooo. .oo.  .oo.    .ooooo.   .oooo.o          Y88bo.      .o888oo  .oooo.    888oooo.   .oooo.o          88.  .8'        Y88bo.      .o888oo oooo  oooo  o888oo  o888oo  \r\n `\"Y8888o.   888  `888  `888P\"Y88bP\"Y88b  d88' `88b d88(  \"8           `\"Y8888o.    888   `P  )88b   d88' `88b d88(  \"8          `88.8P           `\"Y8888o.    888   `888  `888   888     888    \r\n     `\"Y88b  888   888   888   888   888  888ooo888 `\"Y88b.                `\"Y88b   888    .oP\"888   888   888 `\"Y88b.            d888[.8'            `\"Y88b   888    888   888   888     888    \r\noo     .d8P  888   888   888   888   888  888    .o o.  )88b .o.      oo     .d8P   888 . d8(  888   888   888 o.  )88b .o.      88' `88.        oo     .d8P   888 .  888   888   888     888    \r\n8\"\"88888P'  o888o o888o o888o o888o o888o `Y8bod8P' 8\"\"888P' Y8P      8\"\"88888P'    \"888\" `Y888\"\"8o  `Y8bod8P' 8\"\"888P' Y8P      `bodP'`88.      8\"\"88888P'    \"888\"  `V88V\"V8P' o888o   o888o   \r\n                                                              '                                                          '                                                                       \r\n                                                                                                                                                                                                 \r\n                                                                                                                                                                                                 ");
+            Console.ReadLine();
+            Console.Clear();
+
+            Console.WriteLine("Congracts truck-kun ran you over and now you have regressed to the game world of Slimes, Stabs, & Stuff. Your mission win and try not to die");
+            Console.ReadLine();
+            Console.WriteLine("which you will");
+            System.Threading.Thread.Sleep(1000);
+            Console.Clear();
+
+
+            Console.WriteLine("You look up and see a door with a sign saying : Hello sacrafice #584 ");
+            System.Threading.Thread.Sleep(3000);
+            Console.Clear();
+
+            Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels.");
+            Console.WriteLine("After each level you will unlock a new one. You will always have a choice of going back a level to grind or find more loot.");
+            Console.WriteLine("Though you can choos to fight a monster of run but picking run during a battle will have consiquences, so pick at your own expense ");
+            Console.WriteLine("You can also choose to go to the shop to buy items and you can also choose to open your inventory to see what you have.");
+            Console.WriteLine("May the Great Winged Lion have mercy on you ");
+            Console.ReadLine();
+            Console.Clear();
+        }
+    }
+
+    /*public class HealthShop
+    {
+        public static void DisplayHealthShop(List<health> shopHealth)
+        {
+            Console.WriteLine("Welcome to the Health Shop!");
+            Console.WriteLine("Here are the health items available for purchase:\n");
+            for (int i = 0; i < shopHealth.Count; i++)
+            {
+                var h = shopHealth[i];
+                Console.WriteLine($"{i + 1}. {h.Name} - {h.Cost} coins - Heals {h.Heal} health");
+            }
+            Console.WriteLine($"{shopHealth.Count + 1}. Exit Shop");
+            Console.WriteLine("\nEnter the number of the health item you want to buy, or exit:");
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out int choice))
+            {
+                if (choice >= 1 && choice <= shopHealth.Count)
+                {
+                    var selected = shopHealth[choice - 1];
+                    if (Player.Coins >= selected.Cost)
+                    {
+                        Player.Coins -= selected.Cost;
+                        Player.Health += selected.Heal;
+                        Console.WriteLine($"You bought and used the {selected.Name}! Your health is now {Player.Health}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have enough coins!");
+                    }
+                }
+                else if (choice == shopHealth.Count + 1)
+                {
+                    Console.WriteLine("Exiting shop.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+            }
+        }
+    }
+*/
+    public class run
+    {
+        public static void RunAway()
+        {
+            Random rand = new Random();
+            int chance = rand.Next(1, 101); // 1 to 100
+            if (chance <= 100) // 100% chance to successfully run away
+            {
+                Console.WriteLine("You successfully ran away!");
+            }
+            else
+            {
+                int damage = rand.Next(5, 11); // Take between 5 and 10 damage
+                Player.Health -= damage;
+                Console.WriteLine($"You failed to run away and took {damage} damage! Your health is now {Player.Health}.");
+            }
+        }
+    }
 
     public class Shop
     {
@@ -100,37 +239,7 @@ namespace Methods
         }
     }
 
-    public class health
-    {
-        public string Name { get; set; }
-        public int Cost { get; set; }
-        public int Heal { get; set; }
-        public health(string Name, int Cost, int Heal)
-        {
-            this.Name = Name;
-            this.Cost = Cost;
-            this.Heal = Heal;
-        }
-    }
-    public class weapons
-    {
-        public string Name { get; set; }
-        public int Cost { get; set; }
-        public int Damage { get; set; }
-        public bool IsRanged { get; set; }
-        public int UsesLeft { get; set; }
 
-        public weapons(string Name, int Cost, int Damage, bool IsRanged, int UsesLeft)
-        {
-            this.Name = Name;
-            this.Cost = Cost;
-            this.Damage = Damage;
-            this.IsRanged = IsRanged;
-            this.UsesLeft = UsesLeft;
-
-
-        }
-    }
 
     public class secretitems
     {
@@ -138,7 +247,7 @@ namespace Methods
 
         public static void DisplaySecretItems()
         {
-            Console.WriteLine("Welcome to the Secret Items Shop! Please enter the code:");
+            Console.WriteLine("Welcome to the Secret Items Shop! Please enter the code: ");
             string code = Console.ReadLine().ToLower();
 
             if (code == "magi")
@@ -176,7 +285,7 @@ namespace Methods
     {
         public static void DisplayInventory()
         {
-            Console.WriteLine("Your Inventory:");
+            Console.WriteLine("Your Inventory: ");
             Console.WriteLine($"Health: {Player.Health}");
             Console.WriteLine($"Coins: {Player.Coins}");
             Console.WriteLine($"Weapon: {Player.Weapon}");
@@ -190,7 +299,7 @@ namespace Methods
             }
             else
             {
-                Console.WriteLine("No other items in inventory.");
+                Console.WriteLine("No other items in inventory. ");
             }
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
@@ -211,7 +320,7 @@ namespace Methods
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} | {monster.Name} Health: {monsterHealth} Damage: {monsterDamage} Coin Drops: {monsterCoins} Amount of Monsters {monsterAmount}");
+                Console.WriteLine($"\nYour Health: {Player.Health} |||| {monster.Name} || Health: {monsterHealth} || Damage: {monsterDamage} || Coin Drops: {monsterCoins} || Amount of Monsters {monsterAmount}");
                 Console.WriteLine("Choose your action: (attack/run)");
                 string action = Console.ReadLine().ToLower();
 
@@ -223,6 +332,7 @@ namespace Methods
                     if (monsterHealth <= 0)
                     {
                         Console.WriteLine($"You defeated the {monster.Name}!");
+                        Player.Coins += monsterCoins;
                         break;
                     }
 
@@ -232,25 +342,25 @@ namespace Methods
                 else if (action == "run")
                 {
                     Console.WriteLine("You attempt to run away...");
-                    // Add any run consequences here if you want
+                    run.RunAway();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid action. The monster attacks you!");
+                    Console.WriteLine("Invalid action. The monster attacks you! ");
                     Player.Health -= monster.Damage;
                 }
             }
 
             if (Player.Health <= 0)
             {
-                Console.WriteLine("hahahahahah you died lol");
+                Console.WriteLine("hahahahahah you died lol ");
             }
         }
 
         private static int GetPlayerAttack()
         {
-            // You can make this more dynamic if you want to use weapon objects
+            //make this more dynamic if use weapon objects?
             return Player.Weapon switch
             {
                 "Wooden Sword" => 5,
@@ -260,31 +370,15 @@ namespace Methods
                 "Curved Knife" => 10,
                 "Long Horseback Bow" => 15,
                 "Strong Blow Bow" => 35,
-                _ => 2 // default for fists or unknown weapon
+                _ => 2 // default for fists 
             };
         }
     }
 
 
-    public class Player
-    {
-        public static int Health { get; set; } = 50;
-        public static int Coins { get; set; } = 10;
-        public static string Weapon { get; set; }
-        public static List<string> Items { get; set; } = new List<string>();
-
-        public static Room CurrentRoom { get; set; }
-        public static void DisplayStats()
-        {
-            Console.WriteLine($"Health: {Health}");
-            Console.WriteLine($"Coins: {Coins}");
-            Console.WriteLine($"Weapon: {Weapon}");
-        }
-    }
-
 
     public class CREDITS
-        {
+    {
         public static void DisplayCredits()
         {
             Console.WriteLine("Honorable mentions");
@@ -340,7 +434,7 @@ namespace Methods
             string choice = Console.ReadLine();
             if (choice.ToLower() == "yes")
             {
-                Console.WriteLine("Dawm ok... Farewell Adventurere, May the abyss be to your liking");
+                Console.WriteLine("Dawm ok... Farewell Adventurere, May the abyss be to your liking ");
                 Environment.Exit(0);
             }
             else
@@ -351,25 +445,4 @@ namespace Methods
     }
 
 
-    public class items
-    {
-        public static void DisplayItems()
-        {
-            Console.WriteLine("Available Items:");
-            Console.WriteLine("1. Health Potion - Restores 10 health points.");
-            Console.WriteLine("2. Weed - Restores 5 health points.");
-            Console.WriteLine("3. Wooden Sword - Basic weapon with low damage.");
-            Console.WriteLine("4. Curved Knife - Increases damage by 10 points.");
-            Console.WriteLine("5. Long Slender Blade - Increases damage by 15 points.");
-            Console.WriteLine("6. French Thin Pencil Sword - Increases damage by 20 points.");
-            Console.WriteLine("7. Arab Curved Thin Sword - Increases damage by 35 points.");
-            Console.WriteLine("8. Long Horseback Bow - Increases damage by 15 points.");
-            Console.WriteLine("9. Strong Blow Bow - Increases damage by 35 points.");
-        }
-    }
-
-
-
 }
-
-
