@@ -65,6 +65,8 @@ namespace calculator
             weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15, true, 15);
             weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35, true, 20);
 
+            Healing HealthPotions = new Healing("Health Potion", 15, 10);
+            Healing Weed = new Healing("Weed", 5, 5);
 
 
 
@@ -172,11 +174,14 @@ namespace calculator
                     case "shop":
                         List<weapons> shopWeapons = new List<weapons>
                         {
-
                             WoodenSword, LongSlenderBlade, FrenchThinPencilSword, ArabCurvedThinSword,
                             CurvedKnife, LongHorsebackBow, StrongBlowBow
                         };
-                        Shop.DisplayShop(shopWeapons);
+                        List<Healing> shopHealing = new List<Healing>
+                        {
+                            HealthPotions, Weed
+                        };
+                        Shop.DisplayShop(shopWeapons, shopHealing);
                         break;
                     case "inventory":
 
