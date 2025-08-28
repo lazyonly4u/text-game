@@ -5,8 +5,6 @@ using System.Reflection.PortableExecutable;
 
 namespace Methods
 {
-
-
     public class Room
     {
         public string Name { get; set; }
@@ -23,12 +21,8 @@ namespace Methods
             Console.Clear();
             Console.WriteLine($"You enter: {Name}");
             Console.WriteLine(Description);
-
         }
-
     }
-
-
 
     public class Monster
     {
@@ -60,6 +54,7 @@ namespace Methods
             this.Heal = Heal;
         }
     }
+
     public class weapons
     {
         public string Name { get; set; }
@@ -75,7 +70,6 @@ namespace Methods
             this.Damage = Damage;
             this.IsRanged = IsRanged;
             this.UsesLeft = UsesLeft;
-
         }
     }
 
@@ -140,8 +134,6 @@ namespace Methods
         }
     }
 
-
-
     public class run
     {
         public static void RunAway()
@@ -202,13 +194,11 @@ namespace Methods
                             }
                             Console.WriteLine($"You bought {selected.Name}! It has been added to your inventory. Use the inventory to equip it.");
                             Console.ReadLine();
-
                         }
                         else
                         {
                             Console.WriteLine("You don't have enough coins!");
                             Console.ReadLine();
-
                         }
                     }
                     else if (choice == shopWeapons.Count + 1)
@@ -250,13 +240,11 @@ namespace Methods
                         Player.Items.Add(selected.Name);
                         Console.WriteLine($"You bought {selected.Name}! It has been added to your inventory. Use the inventory to consume it.");
                         Console.ReadLine();
-
                     }
                     else
                     {
                         Console.WriteLine("You don't have enough coins!");
                         Console.ReadLine();
-
                     }
                 }
                 else if (choice == shopHealing.Count + 1)
@@ -305,13 +293,11 @@ namespace Methods
                             Console.WriteLine($"You used {healItem.Name} and restored {healItem.Heal} health! Current health: {Player.Health}");
                             Player.Items.RemoveAt(itemNum - 1);
                             Console.ReadLine();
-
                         }
                         else
                         {
                             Console.WriteLine("That item cannot be used for healing.");
                             Console.ReadLine();
-
                         }
                     }
                 }
@@ -326,13 +312,11 @@ namespace Methods
                             Player.Weapon = itemName;
                             Console.WriteLine($"You equipped {itemName}!");
                             Console.ReadLine();
-
                         }
                         else
                         {
                             Console.WriteLine("That item cannot be equipped as a weapon.");
                             Console.ReadLine();
-
                         }
                     }
                 }
@@ -366,8 +350,6 @@ namespace Methods
         }
     }
 
-
-
     public class secretitems
     {
         private static int wrongAttempts = 0;
@@ -399,7 +381,6 @@ namespace Methods
                     Console.WriteLine("Maybe next time!");
                     Console.ReadLine();
                 }
-
                 wrongAttempts = 0; // reset on success
             }
             else if (code == "av4")
@@ -412,20 +393,17 @@ namespace Methods
                         Player.Items.Add("Avatar Powers");
                         Console.WriteLine("Avatar Powers has been added to your inventory!");
                         Console.ReadLine();
-
                     }
                     else
                     {
                         Console.WriteLine("You already have Avatar Powers in your inventory.");
                         Console.ReadLine();
-
                     }
                 }
                 else
                 {
                     Console.WriteLine("Maybe next time!");
                     Console.ReadLine();
-
                 }
                 wrongAttempts = 0; // reset on success
             }
@@ -439,20 +417,17 @@ namespace Methods
                         Player.Items.Add("Lostvayne");
                         Console.WriteLine("Lostvayne has been added to your inventory!");
                         Console.ReadLine();
-
                     }
                     else
                     {
                         Console.WriteLine("You already have Lostvayne in your inventory.");
                         Console.ReadLine();
-
                     }
                 }
                 else
                 {
                     Console.WriteLine("Maybe next time!");
                     Console.ReadLine();
-
                 }
                 wrongAttempts = 0; // reset on success
             }
@@ -468,9 +443,6 @@ namespace Methods
             }
         }
     }
-
- 
-
 
     public class Combat
     {
@@ -545,8 +517,6 @@ namespace Methods
         }
     }
 
-
-
     public class CREDITS
     {
         public static void DisplayCredits()
@@ -617,6 +587,5 @@ namespace Methods
             }
         }
     }
-
 
 }
