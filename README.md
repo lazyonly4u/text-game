@@ -1,4 +1,5 @@
 
+
 using Methods;
 using System;
 namespace calculator
@@ -7,32 +8,13 @@ namespace calculator
     {
         static void Main(string[] args)
         {
-            Console.ReadLine();
+            intro.DisplayIntro();
 
-            Console.WriteLine(" .oooooo..o oooo   o8o                                                 .oooooo..o     .              .o8                           .oo.           .oooooo..o     .                .o88o.  .o88o. \r\nd8P'    `Y8 `888   `\"'                                                d8P'    `Y8   .o8             \"888                         .88' `8.        d8P'    `Y8   .o8                888 `\"  888 `\" \r\nY88bo.       888  oooo  ooo. .oo.  .oo.    .ooooo.   .oooo.o          Y88bo.      .o888oo  .oooo.    888oooo.   .oooo.o          88.  .8'        Y88bo.      .o888oo oooo  oooo  o888oo  o888oo  \r\n `\"Y8888o.   888  `888  `888P\"Y88bP\"Y88b  d88' `88b d88(  \"8           `\"Y8888o.    888   `P  )88b   d88' `88b d88(  \"8          `88.8P           `\"Y8888o.    888   `888  `888   888     888    \r\n     `\"Y88b  888   888   888   888   888  888ooo888 `\"Y88b.                `\"Y88b   888    .oP\"888   888   888 `\"Y88b.            d888[.8'            `\"Y88b   888    888   888   888     888    \r\noo     .d8P  888   888   888   888   888  888    .o o.  )88b .o.      oo     .d8P   888 . d8(  888   888   888 o.  )88b .o.      88' `88.        oo     .d8P   888 .  888   888   888     888    \r\n8\"\"88888P'  o888o o888o o888o o888o o888o `Y8bod8P' 8\"\"888P' Y8P      8\"\"88888P'    \"888\" `Y888\"\"8o  `Y8bod8P' 8\"\"888P' Y8P      `bodP'`88.      8\"\"88888P'    \"888\"  `V88V\"V8P' o888o   o888o   \r\n                                                              '                                                          '                                                                       \r\n                                                                                                                                                                                                 \r\n                                                                                                                                                                                                 ");
-            Console.ReadLine();
-            Console.Clear();
-            Console.WriteLine("Congracts truck-kun ran you over and now you have regressed to the game world of Slimes, Stabs, & Stuff. Your mission win and try not to die");
-            Console.ReadLine();
-            Console.WriteLine("which you will");
-            System.Threading.Thread.Sleep(1000);
-            Console.Clear();
-
-
-            Console.WriteLine("You look up and see a door with a sign saying : Hello sacrafice #584");
-            System.Threading.Thread.Sleep(3000);
-            Console.Clear();
-
-            Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels.");
-            Console.WriteLine("After each level you will unlock a new one. You will always have a choice of going back a level to grind or find more loot.");
-            Console.WriteLine("Though you can choos to fight a monster of run but picking run during a battle will have consiquences, so pick at your own expense ");
-            Console.WriteLine("You can also choose to go to the shop to buy items and you can also choose to open your inventory to see what you have.");
-            Console.WriteLine("May the Great Winged Lion have mercy on you");
-            Console.ReadLine();
-            Console.Clear();
-
-            Console.WriteLine("You see a door apear out of nowhere with a wooden sword in front of the door(congrats on your first weapon!)");
+            Console.WriteLine("You see a door appear out of nowhere with a wooden sword in front of the door (congrats on your first weapon!) ");
+            Console.WriteLine("Starter free wooden sword || Cost: free || damage: 5");
             Console.WriteLine("Do you want to equip it? (yes/no)");
+            Console.WriteLine("If no, it will be added to your inventory");
+            Console.Write("Your choice: ");
             string equipChoice = Console.ReadLine();
             if (equipChoice.ToLower() == "yes")
             {
@@ -41,16 +23,18 @@ namespace calculator
             }
             else if (equipChoice.ToLower() == "no")
             {
-                Console.WriteLine("You keep your current weapon: " + Player.Weapon);
+                Player.Items.Add("Wooden Sword");
+                Console.WriteLine("The Wooden Sword has been added to your inventory.");
             }
             else
             {
-                Console.WriteLine("Invalid choice, you lose your chance to pick up the weapon");
+                Console.WriteLine("Invalid choice, you lose your chance to pick up the weapon.");
             }
 
 
             List<Room> rooms = new List<Room>
             {
+            new Room("The Beginning", "You find yourself in a dimly lit dungeon with stone walls and a single wooden door. Beside the door is a sign that says: Level 0 - The beginning"),
             new Room("Fungus Among Us", "Beside the door is a sign that says: Level 1 - Fungus Among Us. You open the door and see a dungeon room almost masks itself as a forest. And suprisingly its filled with waking mushrooms. Do you wish to fight? or hide away like a coward"),
             new Room("Slime Schlime Time", "A door Suddenly appears with markings: Level 2 - Slime Schlime Time. Through the door was an artificial looking cave dungeon with unknown plants mixed with moss which grew through the cracks. And boom filled with Slime blobs, not the good type either. Do you wish to run or fight?"),
             new Room("Nestflix & Chill", "Will you be able to survive through this? A door not so suprisingly appears with markings: Level 3 - Nestflix & Chill. You open the door and see a fancy dungeon room with pillars and suprisingly a few twigs fall down. You look up and you find nests, some with a few eggs and some with GRIFFINS?!? They look at you glaringly and with bloodlust. Do you wish to run or fight?"),
@@ -61,7 +45,7 @@ namespace calculator
 
             };
 
-            
+
             Monster WalkingMushroom = new Monster("Mushroom", 5, 2, 1, 10);
             Monster SlimeBlob = new Monster("Slime Blob", 10, 8, 2, 8);
             Monster Griffin = new Monster("Griffin", 25, 20, 10, 5);
@@ -81,12 +65,12 @@ namespace calculator
             weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15, true, 15);
             weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35, true, 20);
 
-             
+
 
 
             // Example: Start at a chosen room
             int currentRoom = 0;
-            Console.WriteLine("Which Level do you want to go to? (1-7) or type '8' to quit");
+            Console.WriteLine("Which Level do you want to go to? (0-7) or type '8' to quit");
             string input = Console.ReadLine();
             if (input == "8")
             {
@@ -99,7 +83,6 @@ namespace calculator
             }
             else
             {
-                Console.WriteLine("Invalid choice, starting at Level 1");
                 currentRoom = 0;
             }
 
@@ -109,33 +92,36 @@ namespace calculator
             {
                 Room room = rooms[currentRoom];
                 room.Enter();
-                Console.WriteLine("What do you want to do? (fight/run/shop/inventory/secret/exit)");
+                Console.WriteLine("What do you want to do? (Explore/Change lvl/run/shop/inventory/secret/exit)");
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
-                    case "fight":
+                    case "explore":
                         Monster monster = null;
                         switch (currentRoom)
                         {
                             case 0:
-                                monster = WalkingMushroom;
+                                Console.WriteLine("This is a safe area. No monsters here.");
                                 break;
                             case 1:
-                                monster = SlimeBlob;
+                                monster = WalkingMushroom;
                                 break;
                             case 2:
-                                monster = Griffin;
+                                monster = SlimeBlob;
                                 break;
                             case 3:
-                                monster = SeaSerpent;
+                                monster = Griffin;
                                 break;
                             case 4:
-                                monster = Basilisk;
+                                monster = SeaSerpent;
                                 break;
                             case 5:
-                                monster = Wyvern;
+                                monster = Basilisk;
                                 break;
                             case 6:
+                                monster = Wyvern;
+                                break;
+                            case 7:
                                 monster = Ditto;
                                 break;
                         }
@@ -162,14 +148,31 @@ namespace calculator
                             }
                         }
                         break;
+                    case "change lvl":
+                        Console.WriteLine("Which Level do you want to go to? (0-7) or type '8' to quit");
+                        string lvlInput = Console.ReadLine();
+                        if (int.TryParse(lvlInput, out int newRoomNumber) && newRoomNumber >= 0 && newRoomNumber < rooms.Count)
+                        {
+                            currentRoom = newRoomNumber;
+                        }
+                        else if (lvlInput == "8")
+                        {
+                            Exit.ExitGame();
+                            playing = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid level number. Staying in the current level.");
+                        }
+                        break;
                     case "run":
                         Console.WriteLine("You ran away safely.");
-                        // Possible penalty for running can be added here
+                        run.RunAway();
                         break;
                     case "shop":
                         List<weapons> shopWeapons = new List<weapons>
                         {
-                            
+
                             WoodenSword, LongSlenderBlade, FrenchThinPencilSword, ArabCurvedThinSword,
                             CurvedKnife, LongHorsebackBow, StrongBlowBow
                         };
