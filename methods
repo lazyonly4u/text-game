@@ -1,7 +1,10 @@
 
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Reflection.PortableExecutable;
+using static System.Net.Mime.MediaTypeNames;
+using System.Linq;
 
 namespace Methods
 {
@@ -101,6 +104,22 @@ namespace Methods
             Console.WriteLine($"Weapon: {Weapon}");
             Console.WriteLine("Items: " + (Items.Count > 0 ? string.Join(", ", Items) : "None"));
         }
+
+       
+    }
+
+    public static class WeaponLibrary
+    {
+        public static List<weapons> AllWeapons = new List<weapons>
+    {
+        new weapons("Wooden Sword", 0, 5, false, 10),
+        new weapons("Long Slender Blade", 16, 15, false, 15),
+        new weapons("French Thin Pencil Sword", 22, 20, false, 20),
+        new weapons("Arab Curved Thin Sword", 30, 35, false, 35),
+        new weapons("Curved Knife", 10, 10, false, 15),
+        new weapons("Long Horseback Bow", 13, 15, true, 15),
+        new weapons("Strong Blow Bow", 35, 35, true, 20)
+    };
     }
 
     public class intro
@@ -138,22 +157,11 @@ namespace Methods
     {
         public static void RunAway()
         {
-            Random rand = new Random();
-            int chance = rand.Next(1, 101); // 1 to 100
-            if (chance <= 100) // 100% chance to successfully run away
-            {
-                Console.WriteLine("You successfully ran away!");
-                Console.ReadLine();
-
-            }
-            else
-            {
-                int damage = rand.Next(5, 11); // Take between 5 and 10 damage
-                Player.Health -= damage;
-                Console.WriteLine($"You failed to run away and took {damage} damage! Your health is now {Player.Health}.");
-                Console.ReadLine();
-
-            }
+            Console.WriteLine("You ran away successfully, but you feel a bit embarrassed. You lose 2 coins for your cowardice.");
+            Player.Coins -= 2;
+            if (Player.Coins < 0) Player.Coins = 0; // Prevent negative coins
+            Console.WriteLine($"You now have {Player.Coins} coins.");
+            Console.ReadLine();
         }
     }
 
@@ -265,6 +273,7 @@ namespace Methods
 
     public class Inventory
     {
+
         public static void DisplayInventory()
         {
             Console.WriteLine("Your Inventory: ");
@@ -276,7 +285,23 @@ namespace Methods
                 Console.WriteLine("Items:");
                 for (int i = 0; i < Player.Items.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {Player.Items[i]}");
+                    string itemName = Player.Items[i];
+                    // Try to find weapon info
+                    var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == itemName);
+                    if (weapon != null)
+                    {
+                        Console.WriteLine($"{i + 1}. {itemName} (Weapon) - Damage: {weapon.Damage}");
+                        continue;
+                    }
+                    // Try to find healing info
+                    var healItem = GetHealingItemByName(itemName);
+                    if (healItem != null)
+                    {
+                        Console.WriteLine($"{i + 1}. {itemName} (Healing) - Heals: {healItem.Heal}");
+                        continue;
+                    }
+                    // Otherwise, just print the item name
+                    Console.WriteLine($"{i + 1}. {itemName}");
                 }
                 Console.WriteLine("Type 'use <item number>' to use a healing item or 'equip <item number>' to equip a weapon.");
                 string input = Console.ReadLine();
@@ -285,7 +310,6 @@ namespace Methods
                     if (int.TryParse(input.Substring(4), out int itemNum) && itemNum >= 1 && itemNum <= Player.Items.Count)
                     {
                         string itemName = Player.Items[itemNum - 1];
-                        // Example: Only allow using healing items
                         Healing healItem = GetHealingItemByName(itemName);
                         if (healItem != null)
                         {
@@ -306,8 +330,8 @@ namespace Methods
                     if (int.TryParse(input.Substring(6), out int itemNum) && itemNum >= 1 && itemNum <= Player.Items.Count)
                     {
                         string itemName = Player.Items[itemNum - 1];
-                        // Example: Only allow equipping weapons
-                        if (IsWeapon(itemName))
+                        var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == itemName);
+                        if (weapon != null)
                         {
                             Player.Weapon = itemName;
                             Console.WriteLine($"You equipped {itemName}!");
@@ -329,7 +353,7 @@ namespace Methods
             Console.ReadLine();
         }
 
-        // Helper: Check if item is a weapon (add your weapon names as needed)
+        
         private static bool IsWeapon(string itemName)
         {
             return itemName == "Wooden Sword" ||
@@ -341,7 +365,7 @@ namespace Methods
                    itemName == "Strong Blow Bow";
         }
 
-        // Helper: Get healing item by name (add your healing items as needed)
+        
         private static Healing GetHealingItemByName(string itemName)
         {
             if (itemName == "Health Potion") return new Healing("Health Potion", 0, 10);
@@ -554,7 +578,7 @@ namespace Methods
             Console.WriteLine("Programming: ME");
             Console.WriteLine("\r\nGraphics: Visual Studio\r\n");
 
-            Console.WriteLine("Special Thanks: Louise Christine Popp-Madsen, Zamzam Abdigani Ali, Sudden Motivation, Github, Copilot, My Sanity, My Brain Cells, Youtube, Spotify");
+            Console.WriteLine("Special Thanks: Louise Christine Popp-Madsen, Zamzam Abdigani Ali, Sudden Motivation, Github, Copilot, My Sanity, My Brain Cells, Youtube, Spotify, hot chocolate");
             Console.WriteLine("\r\nPlaytesting: ME\r\n");
             Console.WriteLine("Thanks for playing ig");
             Console.WriteLine("This game was created as a fun project and as an assignment");
