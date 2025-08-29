@@ -94,7 +94,7 @@ namespace calculator
             {
                 Room room = rooms[currentRoom];
                 room.Enter();
-                Console.WriteLine("What do you want to do? (Explore/Change lvl/run/shop/inventory/secret/exit)");
+                Console.WriteLine("What do you want to do? (Explore/Change lvl/shop/inventory/secret/exit)");
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
@@ -167,10 +167,6 @@ namespace calculator
                             Console.WriteLine("Invalid level number. Staying in the current level.");
                         }
                         break;
-                    case "run":
-                        Console.WriteLine("You ran away safely.");
-                        run.RunAway();
-                        break;
                     case "shop":
                         List<weapons> shopWeapons = new List<weapons>
                         {
@@ -201,7 +197,6 @@ namespace calculator
                         break;
                 }
             }
-
         }
     }
 }
