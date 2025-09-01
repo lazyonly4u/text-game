@@ -76,6 +76,17 @@ namespace Methods
         }
     }
 
+    public class SecretWeapons
+    {
+        public string Name { get; set; }
+        public int Damage { get; set; }
+        public SecretWeapons(string Name, int Damage)
+        {
+            this.Name = Name;
+            this.Damage = Damage;
+        }
+    }
+
     public class Healing
     {
         public string Name { get; set; }
@@ -111,7 +122,7 @@ namespace Methods
     public static class WeaponLibrary
     {
         public static List<weapons> AllWeapons = new List<weapons>
-    {
+        {
         new weapons("Wooden Sword", 0, 5, false, 10),
         new weapons("Long Slender Blade", 16, 15, false, 15),
         new weapons("French Thin Pencil Sword", 22, 20, false, 20),
@@ -119,8 +130,10 @@ namespace Methods
         new weapons("Curved Knife", 10, 10, false, 15),
         new weapons("Long Horseback Bow", 13, 15, true, 15),
         new weapons("Strong Blow Bow", 35, 35, true, 20)
-    };
+        };
     }
+
+
 
     public class intro
     {
@@ -293,6 +306,7 @@ namespace Methods
                         Console.WriteLine($"{i + 1}. {itemName} (Weapon) - Damage: {weapon.Damage}");
                         continue;
                     }
+
                     // Try to find healing info
                     var healItem = GetHealingItemByName(itemName);
                     if (healItem != null)
@@ -300,10 +314,16 @@ namespace Methods
                         Console.WriteLine($"{i + 1}. {itemName} (Healing) - Heals: {healItem.Heal}");
                         continue;
                     }
+                    var secretWeapon = GetSecretWeaponByName(itemName);
+                    if (secretWeapon != null)
+                    {
+                        Console.WriteLine($"{i + 1}. {itemName} (Secret Weapon) - Damage: {secretWeapon.Damage}");
+                        continue;
+                    }
                     // Otherwise, just print the item name
                     Console.WriteLine($"{i + 1}. {itemName}");
                 }
-                Console.WriteLine("Type 'use <item number>' to use a healing item or 'equip <item number>' to equip a weapon.");
+                Console.WriteLine("Type 'use <item number>' to use a healing item or 'equip <item number>' to equip a weapon(or 'activate <item number>' to activate secret weapons).");
                 string input = Console.ReadLine();
                 if (input.StartsWith("use "))
                 {
@@ -344,6 +364,25 @@ namespace Methods
                         }
                     }
                 }
+                else if (input.StartsWith("activate "))
+                {
+                    if (int.TryParse(input.Substring(9), out int itemNum) && itemNum >= 1 && itemNum <= Player.Items.Count)
+                    {
+                        string itemName = Player.Items[itemNum - 1];
+                        var secretWeapon = GetSecretWeaponByName(itemName);
+                        if (secretWeapon != null)
+                        {
+                            Player.Weapon = itemName;
+                            Console.WriteLine($"You activated {itemName}!");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("That item cannot be activated as a secret weapon.");
+                            Console.ReadLine();
+                        }
+                    }
+                }
             }
             else
             {
@@ -352,8 +391,19 @@ namespace Methods
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
         }
+        public static SecretWeapons GetSecretWeaponByName(string itemName)
+        {
+            switch (itemName.ToLower())
+            {
+                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000);
+                case "avatar powers": return new SecretWeapons("Avatar Powers", 880);
+                case "lostvayne": return new SecretWeapons("Lostvayne", 500);
+                default: return null;
+            }
+        }
 
-        
+
+
         private static bool IsWeapon(string itemName)
         {
             return itemName == "Wooden Sword" ||
@@ -363,9 +413,10 @@ namespace Methods
                    itemName == "Curved Knife" ||
                    itemName == "Long Horseback Bow" ||
                    itemName == "Strong Blow Bow";
+
         }
 
-        
+
         private static Healing GetHealingItemByName(string itemName)
         {
             if (itemName == "Health Potion") return new Healing("Health Potion", 0, 10);
@@ -388,10 +439,10 @@ namespace Methods
                 Console.WriteLine("You have entered Magical girl wand damage: 1000, do you wish to add into your inventory? (y or n):");
                 if (Console.ReadLine().ToLower() == "y")
                 {
-                    if (!Player.Items.Contains("Magicial girl wand"))
+                    if (!Player.Items.Contains("Magical girl wand"))
                     {
-                        Player.Items.Add("Magicial girl wand");
-                        Console.WriteLine("Magicial girl wand has been added to your inventory!");
+                        Player.Items.Add("Magical girl wand");
+                        Console.WriteLine("Magical girl wand has been added to your inventory!");
                         Console.ReadLine();
                     }
                     else
@@ -526,19 +577,24 @@ namespace Methods
 
         private static int GetPlayerAttack()
         {
-            //make this more dynamic if use weapon objects?
-            return Player.Weapon switch
+            // First check standard weapons
+            var standardWeapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+            if (standardWeapon != null)
             {
-                "Wooden Sword" => 5,
-                "Long Slender Blade" => 15,
-                "French Thin Pencil Sword" => 20,
-                "Arab Curved Thin Sword" => 35,
-                "Curved Knife" => 10,
-                "Long Horseback Bow" => 15,
-                "Strong Blow Bow" => 35,
-                _ => 2 // default for fists 
-            };
+                return standardWeapon.Damage;
+            }
+
+            // Then check secret weapons
+            var secretWeapon = Inventory.GetSecretWeaponByName(Player.Weapon);
+            if (secretWeapon != null)
+            {
+                return secretWeapon.Damage;
+            }
+
+            // Default (unarmed)
+            return 2;
         }
+
     }
 
     public class CREDITS
