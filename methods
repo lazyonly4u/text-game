@@ -73,6 +73,23 @@ namespace Methods
             this.Damage = Damage;
             this.IsRanged = IsRanged;
             this.UsesLeft = UsesLeft;
+
+        }
+
+        public bool IsUsable()
+        {
+            return UsesLeft > 0;
+        }
+        public void Use()
+        {
+            if (UsesLeft > 0)
+            {
+                UsesLeft--;
+            }
+            else
+            {
+                Console.WriteLine($"The weapon {Name} has no uses left and cannot be used.");
+            }
         }
     }
 
@@ -195,7 +212,7 @@ namespace Methods
                 for (int i = 0; i < shopWeapons.Count; i++)
                 {
                     var w = shopWeapons[i];
-                    Console.WriteLine($"{i + 1}. {w.Name} - {w.Cost} coins - Damage {w.Damage}");
+                    Console.WriteLine($"{i + 1}. {w.Name} - {w.Cost} coins - Damage {w.Damage} - {w.UsesLeft} UsesLeft");
                 }
                 Console.WriteLine($"{shopWeapons.Count + 1}. Exit Shop");
 
@@ -303,7 +320,7 @@ namespace Methods
                     var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == itemName);
                     if (weapon != null)
                     {
-                        Console.WriteLine($"{i + 1}. {itemName} (Weapon) - Damage: {weapon.Damage}");
+                        Console.WriteLine($"{i + 1}. {itemName} (Weapon) - Damage: {weapon.Damage} - UsesLeft: {weapon.UsesLeft}");
                         continue;
                     }
 
@@ -525,55 +542,69 @@ namespace Methods
         {
             Console.WriteLine($"A wild {monster.Name} appears!");
             int monsterHealth = monster.Health;
-            int monsterDamage = monster.Damage;
-            int monsterCoins = monster.Coins;
-            int monsterAmount = monster.Amount;
-            int playerAttack = GetPlayerAttack();
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} |||| {monster.Name} || Health: {monsterHealth} || Damage: {monsterDamage} || Coin Drops: {monsterCoins} || Amount of Monsters {monsterAmount}");
+                Console.WriteLine($"\nYour Health: {Player.Health} | {monster.Name} Health: {monsterHealth}");
                 Console.WriteLine("Choose your action: (attack/run)");
                 string action = Console.ReadLine().ToLower();
 
                 if (action == "attack")
                 {
-                    monsterHealth -= playerAttack;
-                    Console.WriteLine($"You attack with your {Player.Weapon} and deal {playerAttack} damage!");
+                    // Find the weapon object from the player's equipped weapon name
+                    var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+
+                    int damageToDeal = 2; // Default damage if no weapon or unusable
+
+                    if (weapon != null && weapon.IsUsable())
+                    {
+                        damageToDeal = weapon.Damage;
+                        weapon.Use();
+
+                        if (!weapon.IsUsable())
+                        {
+                            Console.WriteLine($"Your {weapon.Name} broke!");
+                            Player.Items.Remove(weapon.Name);
+                            Player.Weapon = null;  // Unequip broken weapon
+                        }
+                    }
+
+                    monsterHealth -= damageToDeal;
+                    Console.WriteLine($"You attack with your {(Player.Weapon ?? "fists")} and deal {damageToDeal} damage!");
 
                     if (monsterHealth <= 0)
                     {
                         Console.WriteLine($"You defeated the {monster.Name}!");
-                        Player.Coins += monsterCoins;
+                        Player.Coins += monster.Coins;
                         break;
                     }
 
+                    // Monster attacks back
                     Player.Health -= monster.Damage;
                     Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
                 }
                 else if (action == "run")
                 {
                     Console.WriteLine("You attempt to run away...");
-                    Console.ReadLine();
                     run.RunAway();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid action. The monster attacks you! ");
-                    Console.ReadLine();
-
+                    Console.WriteLine("Invalid action! The monster attacks you.");
                     Player.Health -= monster.Damage;
                 }
             }
 
             if (Player.Health <= 0)
             {
-                Console.WriteLine("hahahahahah you died lol ");
-                Console.ReadLine();
+                Console.WriteLine("You died. Game over.");
                 Environment.Exit(0);
             }
         }
+
+
+
 
         private static int GetPlayerAttack()
         {
