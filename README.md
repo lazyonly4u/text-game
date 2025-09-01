@@ -65,6 +65,10 @@ namespace calculator
             weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15, true, 15);
             weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35, true, 20);
 
+            SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000);
+            SecretWeapons Lostvayne = new SecretWeapons("Lostvayne", 500);
+            SecretWeapons Avatarpowers = new SecretWeapons("Avatar powers", 880);
+
             Healing HealthPotions = new Healing("Health Potion", 15, 10);
             Healing Weed = new Healing("Weed", 5, 5);
 
@@ -103,7 +107,33 @@ namespace calculator
                         switch (currentRoom)
                         {
                             case 0:
-                                Console.WriteLine("This is a safe area. No monsters here.");
+                                Console.WriteLine("This is a safe area. No monsters here. But would you like to drop your wooden sword? and let it be deleted from you inventory? Y/N:");
+                                string dropChoice = Console.ReadLine();
+                                if (dropChoice.ToLower() == "y")
+                                {
+                                    if (Player.Weapon == "Wooden Sword")
+                                    {
+                                        Player.Weapon = "Fists";
+                                        Console.WriteLine("You dropped the Wooden Sword and are now using your fists (does 2 damage points).");
+                                        Console.ReadLine();
+
+                                    }
+                                    else if (Player.Items.Contains("Wooden Sword"))
+                                    {
+                                        Player.Items.Remove("Wooden Sword");
+                                        Console.WriteLine("The Wooden Sword has been removed from your inventory.");
+                                        Console.ReadLine(); 
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("You don't have a Wooden Sword to drop.");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You chose not to drop the Wooden Sword.");
+                                }
+
                                 break;
                             case 1:
                                 monster = WalkingMushroom;
