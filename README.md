@@ -51,16 +51,16 @@ namespace calculator
             Monster Wyvern = new Monster("Wyvern", 80, 90, 35);
             Monster Ditto = new Monster("Ditto", 1000, 500, 0);
 
-            weapons WoodenSword = new weapons("Wooden Sword", 0, 5, false, 10);
+            Weapons WoodenSword = new Weapons("Wooden Sword", 0, 5, false, 10);
 
-            weapons LongSlenderBlade = new weapons("Long Slender Blade", 16, 15, false, 15);
-            weapons FrenchThinPencilSword = new weapons("French Thin Pencil Sword", 22, 20, false, 20);
-            weapons ArabCurvedThinSword = new weapons("Arab Curved Thin Sword", 30, 35, false, 35);
+            Weapons LongSlenderBlade = new Weapons("Long Slender Blade", 16, 15, false, 15);
+            Weapons FrenchThinPencilSword = new Weapons("French Thin Pencil Sword", 22, 20, false, 20);
+            Weapons ArabCurvedThinSword = new Weapons("Arab Curved Thin Sword", 30, 35, false, 35);
 
-            weapons CurvedKnife = new weapons("Curved Knife", 10, 10, false, 15);
+            Weapons CurvedKnife = new Weapons("Curved Knife", 10, 10, false, 15);
 
-            weapons LongHorsebackBow = new weapons("Long Horseback Bow", 13, 15, true, 15);
-            weapons StrongBlowBow = new weapons("Strong Blow Bow", 35, 35, true, 20);
+            Weapons LongHorsebackBow = new Weapons("Long Horseback Bow", 13, 15, true, 15);
+            Weapons StrongBlowBow = new Weapons("Strong Blow Bow", 35, 35, true, 20);
 
             SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000);
             SecretWeapons Lostvayne = new SecretWeapons("Lostvayne", 500);
@@ -93,11 +93,12 @@ namespace calculator
             {
                 Room room = rooms[currentRoom];
                 room.Enter();
-                Console.WriteLine("What do you want to do? (Explore/Change lvl/shop/inventory/secret/exit)");
+                Console.WriteLine("What do you want to do? (Explore(Left)/Change lvl(North or South)/Shop/Inventory/Secret/Exit(Right))");
                 string choice = Console.ReadLine().ToLower();
                 switch (choice)
                 {
                     case "explore":
+                    case "left":
                         Monster monster = null;
                         switch (currentRoom)
                         {
@@ -121,11 +122,13 @@ namespace calculator
                                     else
                                     {
                                         Console.WriteLine("You don't have a Wooden Sword to drop.");
+                                        Console.ReadLine();
                                     }
                                 }
                                 else
                                 {
                                     Console.WriteLine("You chose not to drop the Wooden Sword.");
+                                    Console.ReadLine();
                                 }
                                 break;
                             case 1:
@@ -156,11 +159,13 @@ namespace calculator
                             if (Player.Health <= 0)
                             {
                                 Console.WriteLine("You have been defeated! Game Over.");
+                                Console.ReadLine();
                                 playing = false;
                             }
                             else
                             {
                                 Console.WriteLine($"You defeated the {monster.Name}!");
+                                Console.ReadLine();
                                 if (currentRoom < rooms.Count - 1)
                                 {
                                     currentRoom++;
@@ -168,12 +173,15 @@ namespace calculator
                                 else
                                 {
                                     Console.WriteLine("Congratulations! You have completed all levels!");
+                                    Console.ReadLine();
                                     playing = false;
                                 }
                             }
                         }
                         break;
                     case "change lvl":
+                    case "north":
+                    case "south":
                         Console.WriteLine("Which Level do you want to go to? (0-7) or type '8' to quit");
                         string lvlInput = Console.ReadLine();
                         if (int.TryParse(lvlInput, out int newRoomNumber) && newRoomNumber >= 0 && newRoomNumber < rooms.Count)
@@ -191,7 +199,7 @@ namespace calculator
                         }
                         break;
                     case "shop":
-                        List<weapons> shopWeapons = new List<weapons>
+                        List<Weapons> shopWeapons = new List<Weapons>
                         {
                             WoodenSword, LongSlenderBlade, FrenchThinPencilSword, ArabCurvedThinSword,
                             CurvedKnife, LongHorsebackBow, StrongBlowBow
@@ -209,14 +217,16 @@ namespace calculator
                         secretitems.DisplaySecretItems();
                         break;
                     case "exit":
+                    case "right":
                         Exit.ExitGame();
                         playing = false;
                         break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
+                        Console.ReadLine();
                         break;
                 }
             }
         }
-    }
+    } 
 }
