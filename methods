@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Reflection.PortableExecutable;
 using static System.Net.Mime.MediaTypeNames;
 using System.Linq;
+using System.ComponentModel.Design;
 
 namespace Methods
 {
@@ -31,12 +32,14 @@ namespace Methods
         public int Health { get; set; }
         public int Damage { get; set; }
         public int Coins { get; set; }
-        public Monster(string Name, int Health, int Damage, int Coins )
+        public int SpawnPoint { get; set; }
+        public Monster(string Name, int Health, int Damage, int Coins, int spawnPoint)
         {
             this.Name = Name;
             this.Health = Health;
             this.Damage = Damage;
             this.Coins = Coins;
+            this.SpawnPoint = spawnPoint;
         }
     }
 
@@ -89,10 +92,27 @@ namespace Methods
     {
         public string Name { get; set; }
         public int Damage { get; set; }
-        public SecretWeapons(string Name, int Damage)
+        public int UsesLeft { get; set; }
+        public SecretWeapons(string Name, int Damage, int usesLeft)
         {
             this.Name = Name;
             this.Damage = Damage;
+            UsesLeft = usesLeft;
+        }
+        public bool IsUsable()
+        {
+            return UsesLeft > 0;
+        }
+        public void Use()
+        {
+            if (UsesLeft > 0)
+            {
+                UsesLeft--;
+            }
+            else
+            {
+                Console.WriteLine($"The secret weapon {Name} has no uses left and cannot be used.");
+            }
         }
     }
 
@@ -388,13 +408,14 @@ namespace Methods
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
         }
+
         public static SecretWeapons GetSecretWeaponByName(string itemName)
         {
             switch (itemName.ToLower())
             {
-                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000);
-                case "avatar powers": return new SecretWeapons("Avatar Powers", 880);
-                case "lostvayne": return new SecretWeapons("Lostvayne", 500);
+                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, 1000);
+                case "avatar powers": return new SecretWeapons("Avatar Powers", 880, 1000);
+                case "lostvayne": return new SecretWeapons("Lostvayne", 500, 1000);
                 default: return null;
             }
         }
@@ -514,41 +535,98 @@ namespace Methods
         {
             Console.WriteLine($"A wild {monster.Name} appears!");
             int monsterHealth = monster.Health;
+
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} Your Weapon {Player.Weapon} | {monster.Name} Health: {monsterHealth} ");
-                Console.WriteLine("Choose your action: (attack/change weapon/run)");
+                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | {monster.Name} Health: {monsterHealth} | Distance: {monster.SpawnPoint}");
+                Console.WriteLine("Choose your action: (attack/K.O/change weapon/run)");
                 string action = Console.ReadLine().ToLower();
+
+                var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+               
+
                 if (action == "attack")
                 {
-                    // Find the weapon object from the player's equipped weapon name
-                    var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
-                    int damageToDeal = 2; // Default damage if no weapon or unusable
-                    if (weapon != null && weapon.IsUsable())
+                    if (weapon != null && weapon.IsRanged)
                     {
-                        damageToDeal = weapon.Damage;
-                        weapon.Use();
-                        if (!weapon.IsUsable())
+                        Console.WriteLine("You attack from a distance without the monster hitting you back this turn.");
+                        if (weapon.IsUsable())
                         {
-                            Console.WriteLine($"Your {weapon.Name} broke!");
+                            monsterHealth -= weapon.Damage;
+                            weapon.Use();
+                            Console.WriteLine($"You hit the {monster.Name} for {weapon.Damage} damage.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Your {weapon.Name} has no uses left and breaks!");
                             Player.Items.Remove(weapon.Name);
-                            Player.Weapon = null;  // Unequip broken weapon
-                            Console.ReadLine();
+                            Player.Weapon = null;
+                        }
+
+                        // Decrease distance to monster
+                        monster.SpawnPoint = Math.Max(0, monster.SpawnPoint - 1);
+
+                        if (monsterHealth <= 0)
+                        {
+                            Console.WriteLine($"You defeated the {monster.Name}!");
+                            Player.Coins += monster.Coins;
+                            break;
                         }
                     }
-
-                    monsterHealth -= damageToDeal;
-                    Console.WriteLine($"You attack with your {(Player.Weapon ?? "fists")} and deal {damageToDeal} damage!");
-                    Console.ReadLine();
-                    if (monsterHealth <= 0)
+                    else
                     {
-                        Player.Coins += monster.Coins;
-                        break;
+                        // Melee attack
+                        int damageToDeal = 2; // default unarmed damage
+                        if (weapon != null && weapon.IsUsable())
+                        {
+                            damageToDeal = weapon.Damage;
+                            weapon.Use();
+                            if (!weapon.IsUsable())
+                            {
+                                Console.WriteLine($"Your {weapon.Name} broke!");
+                                Player.Items.Remove(weapon.Name);
+                                Player.Weapon = null;
+                            }
+                        }
+
+                        monsterHealth -= damageToDeal;
+                        Console.WriteLine($"You attack with your {(Player.Weapon ?? "fists")} and deal {damageToDeal} damage!");
+
+                        if (monsterHealth <= 0)
+                        {
+                            Console.WriteLine($"You defeated the {monster.Name}!");
+                            Player.Coins += monster.Coins;
+                            break;
+                        }
+
+                        // Monster attacks back
+                        Player.Health -= monster.Damage;
+                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
                     }
-                    // Monster attacks back
-                    Player.Health -= monster.Damage;
-                    Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
-                    Console.ReadLine();
+                }
+                else if (action == "k.o")
+                {
+                    SecretWeapons secretWeapon = Inventory.GetSecretWeaponByName(Player.Weapon);
+                    if (secretWeapon != null)
+                    {
+                        monsterHealth -= secretWeapon.Damage;
+                        Console.WriteLine($"You use your {secretWeapon.Name} to deal a massive {secretWeapon.Damage} damage!");
+                        Player.Weapon = null; // Secret weapon is single-use
+                        Player.Items.Remove(secretWeapon.Name);
+                        if (monsterHealth <= 0)
+                        {
+                            Console.WriteLine($"You defeated the {monster.Name}!");
+                            Player.Coins += monster.Coins;
+                            break;
+                        }
+                        // Monster attacks back
+                        Player.Health -= monster.Damage;
+                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("You don't have a secret weapon equipped!");
+                    }
                 }
                 else if (action == "change weapon")
                 {
@@ -558,22 +636,28 @@ namespace Methods
                 {
                     Console.WriteLine("You attempt to run away...");
                     run.RunAway();
-                    Console.ReadLine();
                     break;
                 }
                 else
                 {
                     Console.WriteLine("Invalid action! The monster attacks you.");
                     Player.Health -= monster.Damage;
-                    Console.ReadLine();
                 }
             }
+
             if (Player.Health <= 0)
             {
                 Console.WriteLine("You died. Game over.");
                 Environment.Exit(0);
-                Console.ReadLine();
             }
+        }
+
+
+        private static bool IsRangedWeapon(string weaponName)
+        {
+            var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == weaponName);
+            return weapon != null && weapon.IsRanged;
+
         }
 
         private static int GetPlayerAttack()
