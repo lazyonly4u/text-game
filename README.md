@@ -43,13 +43,13 @@ namespace calculator
             new Room("The unknown", "I honestly have no words... But you definitely are NOT getting past this (And yes, I’m totally petty about it). Suddenly, a golden door materializes (the third most expensive thing in the dungeon) With letters encapsulated in diamond saying: Level 7 - The unknown. You open it to find a room overflowing with the most luxurious treasures you’ve ever heard of... or seen. At the center, a grand staircase of pure gold, draped in rich red carpet, leads up to a throne. And sitting on that throne is... what is THAT?! A... DITTO?!?! (Took almost all our budget) DUN DUN DUUUUNNNN! *dramatic sound effect* Do you dare to fight or run away screaming?"),
             };
 
-            Monster WalkingMushroom = new Monster("Mushroom", 5, 2, 1);
-            Monster SlimeBlob = new Monster("Slime Blob", 10, 8, 2);
-            Monster Griffin = new Monster("Griffin", 25, 20, 10);
-            Monster SeaSerpent = new Monster("Sea Serpent", 40, 35, 15);
-            Monster Basilisk = new Monster("Basilisk", 65, 50, 24);
-            Monster Wyvern = new Monster("Wyvern", 80, 90, 35);
-            Monster Ditto = new Monster("Ditto", 1000, 500, 0);
+            Monster WalkingMushroom = new Monster("Mushroom", 5, 2, 1, 15);
+            Monster SlimeBlob = new Monster("Slime Blob", 10, 8, 2, 15);
+            Monster Griffin = new Monster("Griffin", 25, 20, 10, 15);
+            Monster SeaSerpent = new Monster("Sea Serpent", 40, 35, 15, 15);
+            Monster Basilisk = new Monster("Basilisk", 65, 50, 24, 15);
+            Monster Wyvern = new Monster("Wyvern", 80, 90, 35, 15);
+            Monster Ditto = new Monster("Ditto", 1000, 500, 0, 15);
 
             Weapons WoodenSword = new Weapons("Wooden Sword", 0, 5, false, 10);
 
@@ -62,9 +62,9 @@ namespace calculator
             Weapons LongHorsebackBow = new Weapons("Long Horseback Bow", 13, 15, true, 15);
             Weapons StrongBlowBow = new Weapons("Strong Blow Bow", 35, 35, true, 20);
 
-            SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000);
-            SecretWeapons Lostvayne = new SecretWeapons("Lostvayne", 500);
-            SecretWeapons Avatarpowers = new SecretWeapons("Avatar powers", 880);
+            SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000, 1);
+            SecretWeapons Lostvayne = new SecretWeapons("Lostvayne", 500, 1);
+            SecretWeapons Avatarpowers = new SecretWeapons("Avatar powers", 880, 1);
 
             Healing HealthPotions = new Healing("Health Potion", 15, 10);
             Healing Weed = new Healing("Weed", 5, 5);
