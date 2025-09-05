@@ -84,6 +84,7 @@ namespace Methods
             else
             {
                 Console.WriteLine($"The weapon {Name} has no uses left and cannot be used.");
+                Console.ReadLine();
             }
         }
     }
@@ -381,7 +382,7 @@ namespace Methods
                         }
                     }
                 }
-                else if (input.StartsWith("activate "))
+                else if (input.StartsWith("activate"))
                 {
                     if (int.TryParse(input.Substring(9), out int itemNum) && itemNum >= 1 && itemNum <= Player.Items.Count)
                     {
@@ -409,13 +410,13 @@ namespace Methods
             Console.ReadLine();
         }
 
-        public static SecretWeapons GetSecretWeaponByName(string itemName)
+        public static SecretWeapons? GetSecretWeaponByName(string itemName)
         {
-            switch (itemName.ToLower())
+            switch (itemName.ToLower()) //problem area
             {
-                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, 1000);
-                case "avatar powers": return new SecretWeapons("Avatar Powers", 880, 1000);
-                case "lostvayne": return new SecretWeapons("Lostvayne", 500, 1000);
+                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, 1);
+                case "avatar powers": return new SecretWeapons("Avatar Powers", 880, 1);
+                case "lostvayne": return new SecretWeapons("Lostvayne", 500, 1);
                 default: return null;
             }
         }
@@ -426,7 +427,7 @@ namespace Methods
                    itemName == "French Thin Pencil Sword" ||
                    itemName == "Arab Curved Thin Sword" ||
                    itemName == "Curved Knife" ||
-                   itemName == "Long Horseback Bow" ||
+                   itemName == "Long Horseback  Bow" ||
                    itemName == "Strong Blow Bow";
         }
         private static Healing GetHealingItemByName(string itemName)
@@ -436,7 +437,6 @@ namespace Methods
             return null;
         }
     }
-
     public class secretitems
     {
         private static int wrongAttempts = 0;
@@ -611,8 +611,9 @@ namespace Methods
                     {
                         monsterHealth -= secretWeapon.Damage;
                         Console.WriteLine($"You use your {secretWeapon.Name} to deal a massive {secretWeapon.Damage} damage!");
-                        Player.Weapon = null; // Secret weapon is single-use
+                        Console.WriteLine("Since this is a single use weapon it is now broken ");
                         Player.Items.Remove(secretWeapon.Name);
+                        Player.Weapon = null; // Secret weapon is single-use
                         if (monsterHealth <= 0)
                         {
                             Console.WriteLine($"You defeated the {monster.Name}!");
@@ -651,7 +652,6 @@ namespace Methods
                 Environment.Exit(0);
             }
         }
-
 
         private static bool IsRangedWeapon(string weaponName)
         {
