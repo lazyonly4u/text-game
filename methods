@@ -544,6 +544,7 @@ namespace Methods
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
+
                 Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | {monster.Name} Health: {monsterHealth} | Distance: {monster.SpawnPoint}");
                 Console.WriteLine("Choose your action: (attack/K.O/change weapon/run)");
                 string action = Console.ReadLine().ToLower();
@@ -568,7 +569,7 @@ namespace Methods
                             Player.Weapon = null;
                         }
 
-                        // Decrease distance to monster
+                        // Decrease distance to monster slowly for ranged weapons
                         monster.SpawnPoint = Math.Max(0, monster.SpawnPoint - 1);
 
                         if (monsterHealth <= 0)
@@ -578,14 +579,17 @@ namespace Methods
                             break;
                         }
                     }
-                    else
+                    else // melee or unarmed
                     {
-                        // Melee attack
+                        Console.WriteLine("The monster teleports close!");
+
                         int damageToDeal = 2; // default unarmed damage
+
                         if (weapon != null && weapon.IsUsable())
                         {
                             damageToDeal = weapon.Damage;
                             weapon.Use();
+                            Console.WriteLine($"You hit the {monster.Name} for {damageToDeal} damage.");
                             if (!weapon.IsUsable())
                             {
                                 Console.WriteLine($"Your {weapon.Name} broke!");
@@ -593,9 +597,15 @@ namespace Methods
                                 Player.Weapon = null;
                             }
                         }
+                        else if (weapon == null)
+                        {
+                            Console.WriteLine($"You attack with your fists and deal {damageToDeal} damage!");
+                        }
 
                         monsterHealth -= damageToDeal;
-                        Console.WriteLine($"You attack with your {(Player.Weapon ?? "fists")} and deal {damageToDeal} damage!");
+
+                        // Monster teleports right next to you (distance = 0)
+                        monster.SpawnPoint = 0;
 
                         if (monsterHealth <= 0)
                         {
@@ -608,7 +618,9 @@ namespace Methods
                         Player.Health -= monster.Damage;
                         Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
                     }
+
                 }
+
                 else if (action == "k.o")
                 {
                     SecretWeapons secretWeapon = Inventory.GetSecretWeaponByName(Player.Weapon);
@@ -637,6 +649,13 @@ namespace Methods
                 else if (action == "change weapon")
                 {
                     Inventory.DisplayInventory();
+                    var newWeapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+                    if (newWeapon.IsRanged == true)
+                    {
+                        // Reset distance to initial spawn distance (for example 15)
+                        monster.SpawnPoint = +15;
+                        Console.WriteLine("The monster moves away as you switch to a ranged weapon.");
+                    }
                 }
                 else if (action == "run")
                 {
