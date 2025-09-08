@@ -143,7 +143,7 @@ namespace Methods
             Console.WriteLine($"Coins: {Coins}");
             Console.WriteLine($"Weapon: {Weapon}");
             Console.WriteLine("Items: " + (Items.Count > 0 ? string.Join(", ", Items) : "None"));
-        }   
+        }
     }
 
     public static class WeaponLibrary
@@ -380,11 +380,11 @@ namespace Methods
                             Console.WriteLine("That item cannot be equipped as a weapon.");
                             Console.ReadLine();
                         }
-                    }
+                    }                    
                 }
                 else if (input.StartsWith("activate"))
                 {
-                    if (int.TryParse(input.Substring(9), out int itemNum) && itemNum >= 1 && itemNum <= Player.Items.Count)
+                    if (int.TryParse(input.Substring(9), out int itemNum) && itemNum >= 0 && itemNum <= Player.Items.Count)
                     {
                         string itemName = Player.Items[itemNum - 1];
                         var secretWeapon = GetSecretWeaponByName(itemName);
@@ -400,6 +400,11 @@ namespace Methods
                             Console.ReadLine();
                         }
                     }
+                    else
+                    {                     
+                        Console.WriteLine("Invalid item number.");
+                        Console.ReadLine();
+                    }
                 }
             }
             else
@@ -411,8 +416,9 @@ namespace Methods
         }
 
         public static SecretWeapons? GetSecretWeaponByName(string itemName)
-        {
-            switch (itemName.ToLower()) //problem area
+        {  
+            if (string.IsNullOrEmpty(itemName)) return null;
+            switch (itemName.ToLower())
             {
                 case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, 1);
                 case "avatar powers": return new SecretWeapons("Avatar Powers", 880, 1);
@@ -543,7 +549,6 @@ namespace Methods
                 string action = Console.ReadLine().ToLower();
 
                 var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
-               
 
                 if (action == "attack")
                 {
