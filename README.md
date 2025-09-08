@@ -80,7 +80,7 @@ namespace calculator
             }
             if (int.TryParse(input, out int roomNumber) && roomNumber >= 1 && roomNumber <= rooms.Count)
             {
-                currentRoom = roomNumber - 1;
+                currentRoom = roomNumber - 0;
             }
             else
             {
@@ -164,7 +164,6 @@ namespace calculator
                             }
                             else
                             {
-                                Console.WriteLine($"You defeated the {monster.Name}!");
                                 Console.ReadLine();
                                 if (currentRoom < rooms.Count - 1)
                                 {
