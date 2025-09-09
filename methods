@@ -83,7 +83,7 @@ namespace Methods
             }
             else
             {
-                Console.WriteLine($"The weapon {Name} has no uses left and cannot be used.");
+                Console.WriteLine($"The weapon {Name} has no uses left and cannot be used :/");
                 Console.ReadLine();
             }
         }
@@ -172,18 +172,18 @@ namespace Methods
             Console.WriteLine("Congracts truck-kun ran you over and now you have regressed to the game world of Slimes, Stabs, & Stuff. Your mission win and try not to die");
             Console.ReadLine();
             Console.WriteLine("which you will");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(500);
             Console.Clear();
 
             Console.WriteLine("You look up and see a door with a sign saying : Hello sacrafice #584 ");
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(2000);
             Console.Clear();
 
-            Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels.");
-            Console.WriteLine("After each level you will unlock a new one. You will always have a choice of going back a level to grind or find more loot.");
-            Console.WriteLine("Though you can choos to fight a monster of run but picking run during a battle will have consiquences, so pick at your own expense ");
-            Console.WriteLine("You can also choose to go to the shop to buy items and you can also choose to open your inventory to see what you have.");
-            Console.WriteLine("May the Great Winged Lion have mercy on you ");
+            Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels(heyyy booo).");
+            Console.WriteLine("After each level you will unlock a new one. You will always have a choice of going back a level to grind or find more loot(don't worry ill be with you every step of the way).");
+            Console.WriteLine("Though you can choose to fight a monster of run but picking run during a battle will have consiquences, so pick at your own expense (*mentally grabs your hand*)");
+            Console.WriteLine("You can also choose to go to the shop to buy items and you can also choose to open your inventory to see what you have(and with each step you WILL have my input).");
+            Console.WriteLine("May the Great Winged Lion have mercy on you (ong)");
             Console.ReadLine();
             Console.Clear();
         }
@@ -193,10 +193,10 @@ namespace Methods
     {
         public static void RunAway()
         {
-            Console.WriteLine("You ran away successfully, but you feel a bit embarrassed. You lose 2 coins for your cowardice.");
+            Console.WriteLine("You ran away successfully, but you feel a bit embarrassed. You lose 2 coins for your cowardice(lmao).");
             Player.Coins -= 2;
             if (Player.Coins < 0) Player.Coins = 0; // Prevent negative coins
-            Console.WriteLine($"You now have {Player.Coins} coins.");
+            Console.WriteLine($"You now have {Player.Coins} coins (Go broke).");
             Console.ReadLine();
         }
     }
@@ -205,7 +205,7 @@ namespace Methods
     {
         public static void DisplayShop(List<Weapons> shopWeapons, List<Healing> shopHealing)
         {
-            Console.WriteLine("Welcome to the shop!");
+            Console.WriteLine("Welcome to the shop bruv!");
             Console.WriteLine("Would you like to buy Weapons or Healing?");
             string shopChoice = Console.ReadLine().ToLower();
             if (shopChoice == "healing")
@@ -239,7 +239,7 @@ namespace Methods
                         }
                         else
                         {
-                            Console.WriteLine("You don't have enough coins!");
+                            Console.WriteLine("Womp! Womp! You don't have enough coins!");
                             Console.ReadLine();
                         }
                     }
@@ -249,12 +249,12 @@ namespace Methods
                     }
                     else
                     {
-                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("Invalid choice(bro just cant).");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input.");
+                    Console.WriteLine("Invalid input(bro just cant spell).");
                 }
             }
         }
@@ -283,7 +283,7 @@ namespace Methods
                     }
                     else
                     {
-                        Console.WriteLine("You don't have enough coins!");
+                        Console.WriteLine("Womp! Womp! You don't have enough coins!");
                         Console.ReadLine();
                     }
                 }
@@ -293,12 +293,12 @@ namespace Methods
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice.");
+                    Console.WriteLine("Invalid choice(bro just cant).");
                 }
             }
             else
             {
-                Console.WriteLine("Invalid input.");
+                Console.WriteLine("Invalid input(bro just cant spell).");
             }
         }
     }
@@ -341,7 +341,7 @@ namespace Methods
                     // Otherwise, just print the item name
                     Console.WriteLine($"{i + 1}. {itemName}");
                 }
-                Console.WriteLine("Type 'use <item number>' to use a healing item or 'equip <item number>' to equip a weapon(or 'activate <item number>' to activate secret weapons).");
+                Console.WriteLine("Type 'use <item number>' to use a healing item or 'equip <item number>' to equip a weapon(or 'activate <item number>' to activate secret weapons) (PERIODDDD.).");
                 string input = Console.ReadLine();
                 if (input.StartsWith("use "))
                 {
@@ -352,13 +352,13 @@ namespace Methods
                         if (healItem != null)
                         {
                             Player.Health += healItem.Heal;
-                            Console.WriteLine($"You used {healItem.Name} and restored {healItem.Heal} health! Current health: {Player.Health}");
+                            Console.WriteLine($"You used {healItem.Name} and restored {healItem.Heal} health (SELFCAREEE)! Current health: {Player.Health}");
                             Player.Items.RemoveAt(itemNum - 1);
                             Console.ReadLine();
                         }
                         else
                         {
-                            Console.WriteLine("That item cannot be used for healing.");
+                            Console.WriteLine("That item cannot be used for healing(OOP bro. wyd?).");
                             Console.ReadLine();
                         }
                     }
@@ -377,7 +377,7 @@ namespace Methods
                         }
                         else
                         {
-                            Console.WriteLine("That item cannot be equipped as a weapon.");
+                            Console.WriteLine("That item cannot be equipped as a weapon(OOP bro. you is not ok...).");
                             Console.ReadLine();
                         }
                     }                    
@@ -391,25 +391,25 @@ namespace Methods
                         if (secretWeapon != null)
                         {
                             Player.Weapon = itemName;
-                            Console.WriteLine($"You activated {itemName}!");
+                            Console.WriteLine($"You activated {itemName}(OP POWERSS)!");
                             Console.ReadLine();
                         }
                         else
                         {
-                            Console.WriteLine("That item cannot be activated as a secret weapon.");
+                            Console.WriteLine("That item cannot be activated as a secret weapon(umm.. ew).");
                             Console.ReadLine();
                         }
                     }
                     else
                     {                     
-                        Console.WriteLine("Invalid item number.");
+                        Console.WriteLine("Invalid item number(...).");
                         Console.ReadLine();
                     }
                 }
             }
             else
             {
-                Console.WriteLine("No other items in inventory. ");
+                Console.WriteLine("No other items in inventory(cough broke cough). ");
             }
             Console.WriteLine("Press Enter to continue...");
             Console.ReadLine();
@@ -458,18 +458,18 @@ namespace Methods
                     if (!Player.Items.Contains("Magical girl wand"))
                     {
                         Player.Items.Add("Magical girl wand");
-                        Console.WriteLine("Magical girl wand has been added to your inventory!");
+                        Console.WriteLine("Magical girl wand has been added to your inventory(CLOCK ITTTT)!");
                         Console.ReadLine();
                     }
                     else
                     {
-                        Console.WriteLine("You already have Magicial girl wand in your inventory.");
+                        Console.WriteLine("You already have Magicial girl wand in your inventory(ok girlie stop being greedy).");
                         Console.ReadLine();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Maybe next time!");
+                    Console.WriteLine("Maybe next time(huh?)!");
                     Console.ReadLine();
                 }
                 wrongAttempts = 0; // reset on success
@@ -482,18 +482,18 @@ namespace Methods
                     if (!Player.Items.Contains("Avatar Powers"))
                     {
                         Player.Items.Add("Avatar Powers");
-                        Console.WriteLine("Avatar Powers has been added to your inventory!");
+                        Console.WriteLine("Avatar Powers has been added to your inventory(CLOCK ITTTT)!");
                         Console.ReadLine();
                     }
                     else
                     {
-                        Console.WriteLine("You already have Avatar Powers in your inventory.");
+                        Console.WriteLine("You already have Avatar Powers in your inventory(ok girlie stop being greedy).");
                         Console.ReadLine();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Maybe next time!");
+                    Console.WriteLine("Maybe next time(huh?)!");
                     Console.ReadLine();
                 }
                 wrongAttempts = 0; // reset on success
@@ -506,18 +506,18 @@ namespace Methods
                     if (!Player.Items.Contains("Lostvayne"))
                     {
                         Player.Items.Add("Lostvayne");
-                        Console.WriteLine("Lostvayne has been added to your inventory!");
+                        Console.WriteLine("Lostvayne has been added to your inventory(CLOCK ITTTT)!");
                         Console.ReadLine();
                     }
                     else
                     {
-                        Console.WriteLine("You already have Lostvayne in your inventory.");
+                        Console.WriteLine("You already have Lostvayne in your inventory(ok girlie stop being greedy).");
                         Console.ReadLine();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Maybe next time!");
+                    Console.WriteLine("Maybe next time(huh?)!");
                     Console.ReadLine();
                 }
                 wrongAttempts = 0; // reset on success
@@ -526,9 +526,9 @@ namespace Methods
             {
                 wrongAttempts++;
                 int penalty = wrongAttempts == 1 ? 1 : (wrongAttempts - 1) * 5;
-                Console.WriteLine($"Invalid code. Punishment: -{penalty} coins.");
+                Console.WriteLine($"Invalid code. Punishment: -{penalty} coins(LMAO YOU THOUGHTTT).");
                 Player.Coins -= penalty;
-                Console.WriteLine($"You now have {Player.Coins} coins.");
+                Console.WriteLine($"You now have {Player.Coins} coins(BROKEEEE).");
                 Console.WriteLine("Press Enter to continue...");
                 Console.ReadLine();
             }
@@ -544,8 +544,7 @@ namespace Methods
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-
-                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | {monster.Name} Health: {monsterHealth} | Distance: {monster.SpawnPoint}");
+                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} || {monster.Name} Health: {monsterHealth} | Drop: {monster.Coins} | Distance: {monster.SpawnPoint}");
                 Console.WriteLine("Choose your action: (attack/K.O/change weapon/run)");
                 string action = Console.ReadLine().ToLower();
 
@@ -555,7 +554,7 @@ namespace Methods
                 {
                     if (weapon != null && weapon.IsRanged)
                     {
-                        Console.WriteLine("You attack from a distance without the monster hitting you back this turn.");
+                        Console.WriteLine("You attack from a distance without the monster hitting you back this turn(SMARTTTT).");
                         if (weapon.IsUsable())
                         {
                             monsterHealth -= weapon.Damage;
@@ -564,13 +563,12 @@ namespace Methods
                         }
                         else
                         {
-                            Console.WriteLine($"Your {weapon.Name} has no uses left and breaks!");
+                            Console.WriteLine($"Your {weapon.Name} has no uses left and breaks(OH...)!");
                             Player.Items.Remove(weapon.Name);
                             Player.Weapon = null;
                         }
-
-                        // Decrease distance to monster slowly for ranged weapons
-                        monster.SpawnPoint = Math.Max(0, monster.SpawnPoint - 1);
+                        
+                        monster.SpawnPoint = Math.Max(0, monster.SpawnPoint - 1); // Decrease distance to monster slowly for ranged weapons
 
                         if (monsterHealth <= 0)
                         {
@@ -579,9 +577,9 @@ namespace Methods
                             break;
                         }
                     }
-                    else // melee or unarmed
+                    else // non-ranged or unarmed
                     {
-                        Console.WriteLine("The monster teleports close!");
+                        Console.WriteLine("The monster teleports close(lol)!");
 
                         int damageToDeal = 2; // default unarmed damage
 
@@ -592,14 +590,14 @@ namespace Methods
                             Console.WriteLine($"You hit the {monster.Name} for {damageToDeal} damage.");
                             if (!weapon.IsUsable())
                             {
-                                Console.WriteLine($"Your {weapon.Name} broke!");
+                                Console.WriteLine($"Your {weapon.Name} broke(OH...)!");
                                 Player.Items.Remove(weapon.Name);
                                 Player.Weapon = null;
                             }
                         }
                         else if (weapon == null)
                         {
-                            Console.WriteLine($"You attack with your fists and deal {damageToDeal} damage!");
+                            Console.WriteLine($"You attack with your fists and deal {damageToDeal} damage(ew)!");
                         }
 
                         monsterHealth -= damageToDeal;
@@ -609,41 +607,36 @@ namespace Methods
 
                         if (monsterHealth <= 0)
                         {
-                            Console.WriteLine($"You defeated the {monster.Name}!");
+                            Console.WriteLine($"You defeated the {monster.Name}(FINALLYYYY)!");
                             Player.Coins += monster.Coins;
                             break;
                         }
-
-                        // Monster attacks back
-                        Player.Health -= monster.Damage;
-                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
+                        Player.Health -= monster.Damage; // Monster attacks back
+                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage(SHIIIII)!");
                     }
-
                 }
-
                 else if (action == "k.o")
                 {
                     SecretWeapons secretWeapon = Inventory.GetSecretWeaponByName(Player.Weapon);
                     if (secretWeapon != null)
                     {
                         monsterHealth -= secretWeapon.Damage;
-                        Console.WriteLine($"You use your {secretWeapon.Name} to deal a massive {secretWeapon.Damage} damage!");
-                        Console.WriteLine("Since this is a single use weapon it is now broken ");
+                        Console.WriteLine($"You use your {secretWeapon.Name} to deal a massive {secretWeapon.Damage} damage(DAWMMMM CLOCK ITTT)!");
+                        Console.WriteLine("Since this is a single use weapon it is now broken(*sad mini violin music in background*)");
                         Player.Items.Remove(secretWeapon.Name);
                         Player.Weapon = null; // Secret weapon is single-use
                         if (monsterHealth <= 0)
                         {
-                            Console.WriteLine($"You defeated the {monster.Name}!");
+                            Console.WriteLine($"You defeated the {monster.Name}(GIRLIE ATEEEEE. LEFT NO CRUMBS)!");
                             Player.Coins += monster.Coins;
                             break;
                         }
-                        // Monster attacks back
-                        Player.Health -= monster.Damage;
-                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage!");
+                        Player.Health -= monster.Damage; // Monster attacks back
+                        Console.WriteLine($"The {monster.Name} attacks you and deals {monster.Damage} damage(GIRLIE ATE...but left crumbs)!");
                     }
                     else
                     {
-                        Console.WriteLine("You don't have a secret weapon equipped!");
+                        Console.WriteLine("You don't have a secret weapon equipped(oh...um ew)!");
                     }
                 }
                 else if (action == "change weapon")
@@ -651,28 +644,27 @@ namespace Methods
                     Inventory.DisplayInventory();
                     var newWeapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
                     if (newWeapon.IsRanged == true)
-                    {
-                        // Reset distance to initial spawn distance (for example 15)
-                        monster.SpawnPoint = +15;
-                        Console.WriteLine("The monster moves away as you switch to a ranged weapon.");
+                    {                        
+                        monster.SpawnPoint = +15; // Reset distance to initial spawn distance
+                        Console.WriteLine("The monster moves away as you switch to a ranged weapon(*nods head proudly*).");
                     }
                 }
                 else if (action == "run")
                 {
-                    Console.WriteLine("You attempt to run away...");
+                    Console.WriteLine("You attempt to run away...(lol couldn't be me)");
                     run.RunAway();
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid action! The monster attacks you.");
+                    Console.WriteLine("Invalid action! The monster attacks you(HAH).");
                     Player.Health -= monster.Damage;
                 }
             }
 
             if (Player.Health <= 0)
             {
-                Console.WriteLine("You died. Game over.");
+                Console.WriteLine("You died. Game over(wowwww...weak).");
                 Environment.Exit(0);
             }
         }
@@ -756,7 +748,7 @@ namespace Methods
     {
         public static void ExitGame()
         {
-            Console.WriteLine("Are you SURE you want to exit? (yes/no)");
+            Console.WriteLine("Are you SURE you want to exit??? (yes/no)");
             string choice = Console.ReadLine();
             if (choice.ToLower() == "yes")
             {
