@@ -110,7 +110,7 @@ namespace calculator
                                     if (Player.Weapon == "Wooden Sword")
                                     {
                                         Player.Weapon = "Fists";
-                                        Console.WriteLine("You dropped the Wooden Sword and are now using your fists (does 2 damage points).");
+                                        Console.WriteLine("You dropped the Wooden Sword and are now using your fists (does 2 damage points)(ewwww).");
                                         Console.ReadLine();
                                     }
                                     else if (Player.Items.Contains("Wooden Sword"))
@@ -158,7 +158,7 @@ namespace calculator
                             Combat.Fight(monster);
                             if (Player.Health <= 0)
                             {
-                                Console.WriteLine("You have been defeated! Game Over.");
+                                Console.WriteLine("You have been defeated! Game Over(lmao).");
                                 Console.ReadLine();
                                 playing = false;
                             }
@@ -171,7 +171,7 @@ namespace calculator
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Congratulations! You have completed all levels!");
+                                    Console.WriteLine("Congratulations! You have completed all levels(wow did not expect that...)!");
                                     Console.ReadLine();
                                     playing = false;
                                 }
@@ -194,7 +194,7 @@ namespace calculator
                         }
                         else
                         {
-                            Console.WriteLine("Invalid level number. Staying in the current level.");
+                            Console.WriteLine("Invalid level number. Staying in the current level(bro is laggin).");
                         }
                         break;
                     case "shop":
@@ -221,7 +221,7 @@ namespace calculator
                         playing = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Console.WriteLine("Invalid choice, please try again(bro choose/spell it right).");
                         Console.ReadLine();
                         break;
                 }
