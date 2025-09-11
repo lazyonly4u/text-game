@@ -93,11 +93,14 @@ namespace Methods
     {
         public string Name { get; set; }
         public int Damage { get; set; }
+        public bool IsRanged { get; set; }
         public int UsesLeft { get; set; }
-        public SecretWeapons(string Name, int Damage, int usesLeft)
+
+        public SecretWeapons(string Name, int Damage, bool IsRanged, int usesLeft)
         {
             this.Name = Name;
             this.Damage = Damage;
+            this.IsRanged = IsRanged;
             UsesLeft = usesLeft;
         }
         public bool IsUsable()
@@ -420,9 +423,9 @@ namespace Methods
             if (string.IsNullOrEmpty(itemName)) return null;
             switch (itemName.ToLower())
             {
-                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, 1);
-                case "avatar powers": return new SecretWeapons("Avatar Powers", 880, 1);
-                case "lostvayne": return new SecretWeapons("Lostvayne", 500, 1);
+                case "magical girl wand": return new SecretWeapons("Magical girl wand", 1000, false, 1);
+                case "avatar powers": return new SecretWeapons("Avatar Powers", 880, false, 1);
+                case "lostvayne": return new SecretWeapons("Lostvayne", 500, false, 1);
                 default: return null;
             }
         }
