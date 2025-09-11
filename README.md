@@ -2,7 +2,9 @@
 
 using Methods;
 using System;
-namespace calculator
+using System.Numerics;
+using System.Threading;
+namespace textgame
 {
     class Program
     {
@@ -42,6 +44,7 @@ namespace calculator
             new Room("Rock ‘n’ Roar Hideout", "HOW ABOUT THIS!! A door made out a unfinished paper mache(That...was um... supposed to be done...). Beside the door is a paper sign that says: Level 6 - Rock ‘n’ Roar Hideout. You open the door as residue of undried glue and paper sticks on your palm. You see huge dungeon room almost masking itself as a cave with huge rocks bigger than you(yes I just copied and pasted whatcha gon do about it?). As you walk deeper you feel the atmosphere getting hotter and next thing you know right in front of you is a legandary Wyvern(hireing him was the second most expensive thing). Do you wish to run or fight?"),
             new Room("The unknown", "I honestly have no words... But you definitely are NOT getting past this (And yes, I’m totally petty about it). Suddenly, a golden door materializes (the third most expensive thing in the dungeon) With letters encapsulated in diamond saying: Level 7 - The unknown. You open it to find a room overflowing with the most luxurious treasures you’ve ever heard of... or seen. At the center, a grand staircase of pure gold, draped in rich red carpet, leads up to a throne. And sitting on that throne is... what is THAT?! A... DITTO?!?! (Took almost all our budget) DUN DUN DUUUUNNNN! *dramatic sound effect* Do you dare to fight or run away screaming?"),
             };
+            bool[] levelsCompleted = new bool[rooms.Count]; // Default: all false
 
             Monster WalkingMushroom = new Monster("Mushroom", 5, 2, 1, 15);
             Monster SlimeBlob = new Monster("Slime Blob", 10, 8, 2, 15);
@@ -78,9 +81,9 @@ namespace calculator
                 Console.WriteLine("Thanks for playing!");
                 return;
             }
-            if (int.TryParse(input, out int roomNumber) && roomNumber >= 1 && roomNumber <= rooms.Count)
+            if (int.TryParse(input, out int roomNumber) && roomNumber >= 0 && roomNumber <= rooms.Count)
             {
-                currentRoom = roomNumber - 0;
+                currentRoom = roomNumber;
             }
             else
             {
@@ -117,7 +120,7 @@ namespace calculator
                                     {
                                         Player.Items.Remove("Wooden Sword");
                                         Console.WriteLine("The Wooden Sword has been removed from your inventory.");
-                                        Console.ReadLine(); 
+                                        Console.ReadLine();
                                     }
                                     else
                                     {
@@ -161,6 +164,33 @@ namespace calculator
                                 Console.WriteLine("You have been defeated! Game Over(lmao).");
                                 Console.ReadLine();
                                 playing = false;
+                                if (monster != null)
+                                {
+                                    Combat.Fight(monster);
+                                    if (Player.Health <= 0)
+                                    {
+                                        Console.WriteLine("You have been defeated! Game Over(lmao).");
+                                        Console.ReadLine();
+                                        playing = false;
+                                    }
+                                    else
+                                    {
+                                        // Mark current room as completed
+                                        levelsCompleted[currentRoom] = true;
+
+                                        Console.ReadLine();
+                                        if (currentRoom < rooms.Count - 1)
+                                        {
+                                            currentRoom++;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Congratulations! You have completed all levels(wow did not expect that...)!");
+                                            Console.ReadLine();
+                                            playing = false;
+                                        }
+                                    }
+                                }
                             }
                             else
                             {
@@ -186,6 +216,13 @@ namespace calculator
                         if (int.TryParse(lvlInput, out int newRoomNumber) && newRoomNumber >= 0 && newRoomNumber < rooms.Count)
                         {
                             currentRoom = newRoomNumber;
+
+                            if (newRoomNumber > 6 && !levelsCompleted[newRoomNumber - 1])
+                            {
+                                Console.WriteLine("You must complete the previous level first!");
+                                Console.ReadLine();
+                                currentRoom = newRoomNumber - 1;
+                            }
                         }
                         else if (lvlInput == "8")
                         {
@@ -195,6 +232,7 @@ namespace calculator
                         else
                         {
                             Console.WriteLine("Invalid level number. Staying in the current level(bro is laggin).");
+                            Console.ReadLine();
                         }
                         break;
                     case "shop":
@@ -227,5 +265,5 @@ namespace calculator
                 }
             }
         }
-    } 
+    }
 }
