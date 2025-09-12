@@ -545,14 +545,36 @@ namespace Methods
         {
             Console.WriteLine($"A wild {monster.Name} appears!");
             int monsterHealth = monster.Health;
+            Weapons weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | Weapon Damage: {GetPlayerAttack()}  || {monster.Name} Health: {monsterHealth} | Monster Damage: {monster.Damage}| Drop: {monster.Coins} | Distance: {monster.SpawnPoint}");
+                // Refresh weapon info every turn
+                weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+                string weaponUses;
+
+                if (weapon != null)
+                {
+                    weaponUses = weapon.UsesLeft.ToString();
+                }
+                else
+                {
+                    var secretWeapon = Inventory.GetSecretWeaponByName(Player.Weapon);
+                    if (secretWeapon != null)
+                    {
+                        weaponUses = "1"; // single-use secret weapon
+                    }
+                    else
+                    {
+                        weaponUses = "Infinite "; // fists or no weapon
+                    }
+                }
+
+                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | Weapon Damage: {GetPlayerAttack()} | Weapon Uses: {weaponUses} || {monster.Name} Health: {monsterHealth} | Monster Damage: {monster.Damage}| Drop: {monster.Coins} | Distance: {monster.SpawnPoint}");
                 Console.WriteLine("Choose your action: (attack/K.O/change weapon/run)");
                 string action = Console.ReadLine().ToLower();
 
-                var weapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
 
                 if (action == "attack")
                 {
@@ -647,11 +669,11 @@ namespace Methods
                     Inventory.DisplayInventory();
                     var newWeapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
                     if (newWeapon != null)
-                    if (newWeapon.IsRanged == true)
-                    {
-                        monster.SpawnPoint = +15; // Reset distance to initial spawn distance
-                        Console.WriteLine("The monster moves away as you switch to a ranged weapon(*nods head proudly*).");
-                    }
+                        if (newWeapon.IsRanged == true)
+                        {
+                            monster.SpawnPoint = +15; // Reset distance to initial spawn distance
+                            Console.WriteLine("The monster moves away as you switch to a ranged weapon(*nods head proudly*).");
+                        }
                 }
                 else if (action == "run")
                 {
@@ -736,7 +758,7 @@ namespace Methods
             Console.WriteLine("\r\nGraphics: Visual Studio\r\n");
 
             Console.WriteLine("Special Thanks: Louise Christine Popp-Madsen, Zamzam Abdigani Ali, Sudden Motivation, Github, Copilot, My Sanity, My Brain Cells, Youtube, Spotify, hot chocolate");
-            Console.WriteLine("\r\nPlaytesting: ME, Zamzam\r\n");
+            Console.WriteLine("\r\nGuinypig: ME, Zamzam, Zander\r\n");
             Console.WriteLine("Thanks for playing ig");
             Console.WriteLine("This game was created as a fun project and as an assignment");
             Console.WriteLine("Hope it was aight.");
@@ -768,4 +790,3 @@ namespace Methods
         }
     }
 }
-
