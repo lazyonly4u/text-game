@@ -1,5 +1,6 @@
 
 
+
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection.PortableExecutable;
@@ -547,7 +548,7 @@ namespace Methods
 
             while (monsterHealth > 0 && Player.Health > 0)
             {
-                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} || {monster.Name} Health: {monsterHealth} | Drop: {monster.Coins} | Distance: {monster.SpawnPoint}");
+                Console.WriteLine($"\nYour Health: {Player.Health} | Weapon: {Player.Weapon ?? "fists"} | Weapon Damage: {GetPlayerAttack()}  || {monster.Name} Health: {monsterHealth} | Monster Damage: {monster.Damage}| Drop: {monster.Coins} | Distance: {monster.SpawnPoint}");
                 Console.WriteLine("Choose your action: (attack/K.O/change weapon/run)");
                 string action = Console.ReadLine().ToLower();
 
@@ -645,6 +646,7 @@ namespace Methods
                 {
                     Inventory.DisplayInventory();
                     var newWeapon = WeaponLibrary.AllWeapons.FirstOrDefault(w => w.Name == Player.Weapon);
+                    if (newWeapon != null)
                     if (newWeapon.IsRanged == true)
                     {
                         monster.SpawnPoint = +15; // Reset distance to initial spawn distance
@@ -766,3 +768,4 @@ namespace Methods
         }
     }
 }
+
