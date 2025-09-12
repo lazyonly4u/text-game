@@ -65,7 +65,7 @@ namespace textgame
             Weapons LongHorsebackBow = new Weapons("Long Horseback Bow", 13, 15, true, 15);
             Weapons StrongBlowBow = new Weapons("Strong Blow Bow", 35, 35, true, 20);
 
-            SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000 ,false , 1);
+            SecretWeapons Excalibur = new SecretWeapons("Magical girl wand", 1000, false, 1);
             SecretWeapons Lostvayne = new SecretWeapons("Lostvayne", 500, false, 1);
             SecretWeapons Avatarpowers = new SecretWeapons("Avatar powers", 880, false, 1);
 
@@ -187,6 +187,9 @@ namespace textgame
                                         {
                                             Console.WriteLine("Congratulations! You have completed all levels(wow did not expect that...)!");
                                             Console.ReadLine();
+                                            Console.WriteLine("TIME FOR CREDITS!!");
+                                            Thread.Sleep(2000);
+                                            CREDITS.DisplayCredits();
                                             playing = false;
                                         }
                                     }
