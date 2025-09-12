@@ -52,7 +52,7 @@ namespace textgame
             Monster SeaSerpent = new Monster("Sea Serpent", 40, 35, 15, 15);
             Monster Basilisk = new Monster("Basilisk", 65, 50, 24, 15);
             Monster Wyvern = new Monster("Wyvern", 80, 90, 35, 15);
-            Monster Ditto = new Monster("Ditto", 1000, 500, 0, 15);
+            Monster Ditto = new Monster("Ditto", 2000, 1000, 0, 15);
 
             Weapons WoodenSword = new Weapons("Wooden Sword", 0, 5, false, 10);
 
@@ -186,9 +186,7 @@ namespace textgame
                                         else
                                         {
                                             Console.WriteLine("Congratulations! You have completed all levels(wow did not expect that...)!");
-                                            Console.ReadLine();
                                             Console.WriteLine("TIME FOR CREDITS!!");
-                                            Thread.Sleep(2000);
                                             CREDITS.DisplayCredits();
                                             playing = false;
                                         }
@@ -205,7 +203,12 @@ namespace textgame
                                 else
                                 {
                                     Console.WriteLine("Congratulations! You have completed all levels(wow did not expect that...)!");
+                                    Console.WriteLine("TIME FOR CREDITS!!");
                                     Console.ReadLine();
+                                    Console.Clear();
+
+                                    CREDITS.DisplayCredits();
+
                                     playing = false;
                                 }
                             }
