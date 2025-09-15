@@ -1,12 +1,26 @@
-﻿using System;
+using Methods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace textgame4._0.Methods
+namespace Methods
 {
-    internal class Monster
+    public class Monster
     {
+        public string Name { get; set; }
+        public int Health { get; set; }
+        public int Damage { get; set; }
+        public int Coins { get; set; }
+        public int SpawnPoint { get; set; }
+        public Monster(string Name, int Health, int Damage, int Coins, int spawnPoint)
+        {
+            this.Name = Name;
+            this.Health = Health;
+            this.Damage = Damage;
+            this.Coins = Coins;
+            this.SpawnPoint = spawnPoint;
+        }
     }
 }
