@@ -1,12 +1,22 @@
-﻿using System;
+using Methods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace textgame4._0.Methods
+namespace Methods
 {
-    internal class Health
+    public class Health
     {
+        public string Name { get; set; }
+        public int Cost { get; set; }
+        public int Heal { get; set; }
+        public Health(string Name, int Cost, int Heal)
+        {
+            this.Name = Name;
+            this.Cost = Cost;
+            this.Heal = Heal;
+        }
     }
 }
