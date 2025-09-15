@@ -23,7 +23,7 @@ namespace Methods
             Console.Clear();
 
             Console.WriteLine("You look up and see a door with a sign saying : Hello sacrafice #584 ");
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1800);
             Console.Clear();
 
             Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels(heyyy booo).");
