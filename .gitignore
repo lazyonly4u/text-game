@@ -1,4 +1,4 @@
-# Ignore Visual Studio local settings folder
+# Ignore Visual Studio local settings folder and temporary files
 .vs/
 
 # Ignore build output folders
@@ -10,7 +10,11 @@ obj/
 *.suo
 *.userosscache
 *.sln.docstates
+*.sdf
+*.cache
+*.db
 
 # Ignore logs and temporary files
 *.log
 *.tmp
+
