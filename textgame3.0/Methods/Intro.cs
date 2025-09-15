@@ -28,7 +28,7 @@ namespace Methods
             Console.WriteLine("You blink and when you open your eyes the sign says: Hello adventurerer there are 7 levels(heyyy booo).");
             Console.WriteLine("After each level you will unlock a new one. You will always have a choice of going back a level to grind or find more loot(don't worry ill be with you every step of the way).");
             Console.WriteLine("Though you can choose to fight a monster of run but picking run during a battle will have consiquences, so pick at your own expense (*mentally grabs your hand*)");
-            Console.WriteLine("You can also choose to go to the shop to buy items and you can also choose to open your inventory to see what you have(and with each step you WILL have my input).");
+            Console.WriteLine("You can also choose to go to the shop to buy items(beware you can only buy the an item once, no double it and give it to the next person) and you can also choose to open your inventory to see what you have(and with each step you WILL have my input).");
             Console.WriteLine("May the Great Winged Lion have mercy on you (ong)");
             Console.ReadLine();
             Console.Clear();
