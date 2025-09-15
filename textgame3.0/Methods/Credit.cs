@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Methods
 {
-    public class CREDITS
+       public class CREDITS
     {
         public static void DisplayCredits()
         {
@@ -44,7 +44,7 @@ namespace Methods
             Console.WriteLine("\r\nGraphics: Visual Studio\r\n");
 
             Console.WriteLine("Special Thanks: Louise Christine Popp-Madsen, Zamzam Abdigani Ali, Sudden Motivation, Github, Copilot, My Sanity, My Brain Cells, Youtube, Spotify, hot chocolate");
-            Console.WriteLine("\r\nPlaytesting: ME, Zamzam\r\n");
+            Console.WriteLine("\r\nGuinypig: ME, Zamzam, Zander\r\n");
             Console.WriteLine("Thanks for playing ig");
             Console.WriteLine("This game was created as a fun project and as an assignment");
             Console.WriteLine("Hope it was aight.");
