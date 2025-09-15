@@ -59,7 +59,7 @@ namespace textgame
             Monster SeaSerpent = new Monster("Sea Serpent", 40, 35, 15, 15);
             Monster Basilisk = new Monster("Basilisk", 65, 50, 24, 15);
             Monster Wyvern = new Monster("Wyvern", 80, 90, 35, 15);
-            Monster Ditto = new Monster("Ditto", 1000, 500, 0, 15);
+            Monster Ditto = new Monster("Ditto", 2000, 500, 0, 15);
 
             Weapons WoodenSword = new Weapons("Wooden Sword", 0, 5, false, 10);
 
