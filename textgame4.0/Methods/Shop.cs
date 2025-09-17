@@ -21,6 +21,7 @@ namespace Methods
             }
             else
             {
+                // Display all available weapons
                 for (int i = 0; i < shopWeapons.Count; i++)
                 {
                     var w = shopWeapons[i];
@@ -29,8 +30,10 @@ namespace Methods
                 Console.WriteLine($"{shopWeapons.Count + 1}. Exit Shop");
                 Console.WriteLine("\nEnter the number of the weapon you want to buy, or exit:");
                 string input = Console.ReadLine();
+                // Validate player input
                 if (int.TryParse(input, out int choice))
                 {
+                    // Buying a weapon
                     if (choice >= 1 && choice <= shopWeapons.Count)
                     {
                         var selected = shopWeapons[choice - 1];
@@ -39,7 +42,7 @@ namespace Methods
                             Player.Coins -= selected.Cost;
                             if (!Player.Items.Contains(selected.Name))
                             {
-                                Player.Items.Add(selected.Name);
+                                Player.Items.Add(selected.Name); // Add to inventory
                             }
                             Console.WriteLine($"You bought {selected.Name}! It has been added to your inventory. Use the inventory to equip it.");
                             Console.ReadLine();
@@ -50,6 +53,7 @@ namespace Methods
                             Console.ReadLine();
                         }
                     }
+                    // Exit shop
                     else if (choice == shopWeapons.Count + 1)
                     {
                         Console.WriteLine("Exiting shop.");
