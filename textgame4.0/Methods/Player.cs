@@ -19,6 +19,7 @@ namespace Methods
             Console.WriteLine($"Health: {Health}");
             Console.WriteLine($"Coins: {Coins}");
             Console.WriteLine($"Weapon: {Weapon}");
+            // If the player has items, list them separated by commas; otherwise display "None"
             Console.WriteLine("Items: " + (Items.Count > 0 ? string.Join(", ", Items) : "None"));
         }
     }
