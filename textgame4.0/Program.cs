@@ -20,19 +20,20 @@ namespace textgame
             string equipChoice = Console.ReadLine();
             if (equipChoice.ToLower() == "yes")
             {
-                Player.Weapon = "Wooden Sword";
+                Player.Weapon = "Wooden Sword"; // Equip immediately
                 Console.WriteLine("You equipped the Wooden Sword!");
             }
             else if (equipChoice.ToLower() == "no")
             {
-                Player.Items.Add("Wooden Sword");
+                Player.Items.Add("Wooden Sword"); // Add to inventory only
                 Console.WriteLine("The Wooden Sword has been added to your inventory.");
             }
             else
             {
                 Console.WriteLine("Invalid choice, you lose your chance to pick up the weapon.");
             }
-
+            
+            // Define all rooms in the game with descriptions
             List<Room> rooms = new List<Room>
             {
                 new Room("The Beginning", "You find yourself in a dimly lit dungeon with stone walls and a single wooden door. Beside the door is a sign that says: Level 0 - The beginning. As you scan the walls, you faintly notice some graffiti: 'MAGI was here' scrawled in glittery ink. Strange... almost magical. You brush it off and proceed."),
@@ -51,7 +52,7 @@ namespace textgame
 
                 new Room("The Unknown", "I honestly have no words... But you're NOT getting past this (And yes, I’m totally petty about it). A golden door materializes (third most expensive thing in the dungeon). Letters in diamond: Level 7 - The Unknown. Inside: luxurious treasures, and at the center, a golden staircase with red carpet, leading to a throne. And sitting on it: WHAT IS THAT?! A... DITTO?! DUN DUN DUUUNNN! *dramatic sound effect* On the throne’s base, nearly rubbed off: 'Av4 used here... once'. Do you dare to fight, or run away screaming?"),
             };
-            bool[] levelsCompleted = new bool[rooms.Count]; // Default: all false
+            bool[] levelsCompleted = new bool[rooms.Count]; // Tracks completed levels
 
             Monster WalkingMushroom = new Monster("Mushroom", 5, 2, 1, 15);
             Monster SlimeBlob = new Monster("Slime Blob", 10, 8, 2, 15);
@@ -94,7 +95,7 @@ namespace textgame
             }
             else
             {
-                currentRoom = 0;
+                currentRoom = 0; // Default starting room
             }
 
             // Main game loop
@@ -110,6 +111,7 @@ namespace textgame
                     case "explore":
                     case "left":
                         Monster monster = null;
+                        // Determine which monster appears in this room
                         switch (currentRoom)
                         {
                             case 0:
@@ -119,7 +121,7 @@ namespace textgame
                                 {
                                     if (Player.Weapon == "Wooden Sword")
                                     {
-                                        Player.Weapon = "Fists";
+                                        Player.Weapon = "Fists"; // Revert to fists
                                         Console.WriteLine("You dropped the Wooden Sword and are now using your fists (does 2 damage points)(ewwww).");
                                         Console.ReadLine();
                                     }
@@ -163,9 +165,11 @@ namespace textgame
                                 monster = Ditto;
                                 break;
                         }
+                        // Start combat if a monster exists
                         if (monster != null)
                         {
                             Combat.Fight(monster);
+                            // Check if player is dead
                             if (Player.Health <= 0)
                             {
                                 Console.WriteLine("You have been defeated! Game Over(lmao).");
@@ -182,10 +186,8 @@ namespace textgame
                                     }
                                     else
                                     {
-                                        // Mark current room as completed
+                                        // Mark room as completed and advance
                                         levelsCompleted[currentRoom] = true;
-
-                                        Console.ReadLine();
                                         if (currentRoom < rooms.Count - 1)
                                         {
                                             currentRoom++;
@@ -228,8 +230,9 @@ namespace textgame
                         string lvlInput = Console.ReadLine();
                         if (int.TryParse(lvlInput, out int newRoomNumber) && newRoomNumber >= 0 && newRoomNumber < rooms.Count)
                         {
-                            currentRoom = newRoomNumber;
-
+                            currentRoom = newRoomNumber;                           
+                            
+                            // Ensure previous level completed
                             if (newRoomNumber > 6 && !levelsCompleted[newRoomNumber - 1])
                             {
                                 Console.WriteLine("You must complete the previous level first!");
