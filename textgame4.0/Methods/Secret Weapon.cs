@@ -21,10 +21,12 @@ namespace Methods
             this.IsRanged = IsRanged;
             UsesLeft = usesLeft;
         }
+        // Checks if the weapon still has uses left
         public bool IsUsable()
         {
             return UsesLeft > 0;
         }
+        // Uses the weapon once, reducing available uses
         public void Use()
         {
             if (UsesLeft > 0)
@@ -39,7 +41,7 @@ namespace Methods
     }
     public class secretitems
     {
-        private static int wrongAttempts = 0;
+        private static int wrongAttempts = 0; // Tracks failed code attempts
         public static void DisplaySecretItems()
         {
             Console.WriteLine("Welcome to the Secret Items Shop! Please enter the code: ");
@@ -116,9 +118,11 @@ namespace Methods
                 }
                 wrongAttempts = 0; // reset on success
             }
+            // Wrong code entered
             else
             {
                 wrongAttempts++;
+                // Punishment increases with each failed attempt
                 int penalty = wrongAttempts == 1 ? 1 : (wrongAttempts - 1) * 5;
                 Console.WriteLine($"Invalid code. Punishment: -{penalty} coins(LMAO YOU THOUGHTTT).");
                 Player.Coins -= penalty;
